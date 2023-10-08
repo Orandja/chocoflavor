@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "net.orandja.chocoflavor.mods.editsign.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "AbstractSignBlockMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

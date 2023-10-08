@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "net.orandja.chocoflavor.mods.cloudshulkerbox.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "ShulkerBoxBlockEntityMixin",
+    "ShulkerBoxBlockMixin",
+    "ChocoFlavorInit"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "net.orandja.chocoflavor.mods.infinitybucket.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "ChocoFlavorInit",
+    "BucketItemMixin",
+    "AbstractFurnaceBlockEntityMixin",
+    "CowEntityMixin",
+    "GoatEntityMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

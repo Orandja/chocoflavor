@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "net.orandja.chocoflavor.mods.deepstoragebarrel.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "BarrelBlockEntityMixin",
+    "BarrelBlockMixin",
+    "ChocoFlavorInit"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

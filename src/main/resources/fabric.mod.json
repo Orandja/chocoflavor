@@ -1,0 +1,50 @@
+{
+	"schemaVersion": 1,
+	"id": "chocoflavor",
+	"version": "${version}",
+	"name": "ChocoFlavor",
+	"description": "Chocolate flavoring for Vanilla Minecraft!",
+	"authors": [
+		"Olivier \"ShoukaSeikyo\" Martinez"
+	],
+	"contact": {
+		"homepage": "https://shoukaseikyo.fr"
+	},
+	"license": "ALL RIGHTS RESERVED",
+	"icon": "assets/chocoflavor/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.orandja.chocoflavor.ChocoFlavor"
+		]
+	},
+	"mixins": [
+		"mixins/core.mixins.json",
+		"mixins/core.ac.mixins.json",
+		"mixins/animaltemptation.mixins.json",
+		"mixins/bowmendinginfinity.mixins.json",
+		"mixins/brewingstandwithenchantment.mixins.json",
+		"mixins/cloudshulkerbox.mixins.json",
+		"mixins/cloudshulkerbox.ac.mixins.json",
+		"mixins/craftingdispenser.mixins.json",
+		"mixins/cropsdropexperience.mixins.json",
+		"mixins/deathmessage.mixins.json",
+		"mixins/deepstoragebarrel.mixins.json",
+		"mixins/doubletools.mixins.json",
+		"mixins/editsign.mixins.json",
+		"mixins/fastermobspawner.mixins.json",
+		"mixins/furnacewithenchantment.mixins.json",
+		"mixins/higherenchantmentlevel.mixins.json",
+		"mixins/hopperwithenchantment.mixins.json",
+		"mixins/infinitybucket.mixins.json",
+		"mixins/kelpfix.mixins.json",
+		"mixins/nerfedentity.mixins.json",
+		"mixins/transferenchant.mixins.json",
+		"mixins/whitelistedchestblock.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.22",
+		"minecraft": "~1.20.2",
+		"java": ">=17"
+	}
+}

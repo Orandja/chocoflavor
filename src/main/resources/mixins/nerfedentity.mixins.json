@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "net.orandja.chocoflavor.mods.nerfedentity.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "BatEntityMixin",
+    "SchoolingFishEntityMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

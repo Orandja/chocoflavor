@@ -1,0 +1,56 @@
+AnimalTemptation:
+    Axolotl:
+    Bee:
+    Cat:
+    Chicken: OK!
+    Cow:
+    Fox:
+    Horse:
+    Llama:
+    Ocelot:
+    Pig:
+    Rabbit:
+    Sheep:
+    Wolf:
+    Turtle:
+
+    Strider:
+    Goat:
+    Hoglin:
+BowMendingInfinity: OK !
+BrewingStandWithEnchantment:
+    Speed: OK!
+    FUEL: OK!
+    OUTPUT: OK!
+CloudShulkerBox:
+    public: OK!
+    private: OK!
+Core: OK!
+CraftingDispenser:
+    Dispensing in inventory: OK!
+    Dispensing: OK!
+CropsDropExperience: OK!
+DeathMessage: OK!
+DeepStorageBarrel: OK!
+DoubleTools: OK!
+EditSign: OK!
+FasterMobSpawner: OK!
+FurnaceWithEnchantment: OK!
+HigherEnchantmentLevel: OK!
+HopperWithEnchantment:
+    Speed: OK!
+    Filter: OK!
+    Output: OK!
+    Offset: OK!
+    Range: OK!
+InfinityBucket: OK!
+KelpFix: OK!
+NerfedEntity: OK!
+TransferEnchant:
+    Transfer from tools: OK!
+    Transfer from books: OK!
+WhitelistedChestBlock:
+    Custom Recipe: OK!
+    Hopper Extraction: OK!
+    EXPLOSION Protection: OK!
+    Double Chest Placement: OK!

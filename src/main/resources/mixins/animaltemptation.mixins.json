@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "net.orandja.chocoflavor.mods.animaltemptation.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "AnimalEntityMixin",
+    "ChocoFlavorInit"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

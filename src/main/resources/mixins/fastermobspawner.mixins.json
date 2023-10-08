@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "net.orandja.chocoflavor.mods.fastermobspawner.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "MobSpawnerLogicMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

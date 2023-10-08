@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "net.orandja.chocoflavor.mods.craftingdispenser.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "DispenserBlockEntityMixin",
+    "DispenserBlockMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

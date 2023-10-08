@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "net.orandja.chocoflavor.mods.whitelistedchestblock.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "ChestBlockEntityMixin",
+    "ChestBlockMixin",
+    "ChocoFlavorInit"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
