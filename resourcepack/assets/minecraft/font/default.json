@@ -1,0 +1,67 @@
+{
+  "providers": [
+    {
+      "file": "minecraft:gui/crafting.png",
+      "chars": [
+        "\uF000"
+      ],
+      "height": 135,
+      "ascent": 13,
+      "type": "bitmap"
+    },
+    {
+      "file": "minecraft:gui/pixel.png",
+      "chars": [
+        "\uf001"
+      ],
+      "height": -3,
+      "ascent": -2147483648,
+      "type": "bitmap"
+    },
+    {
+      "__comment":  "GUI Offset",
+      "file": "minecraft:gui/pixel.png",
+      "chars": [
+        "\uf002"
+      ],
+      "height": -10,
+      "ascent": -2147483648,
+      "type": "bitmap"
+    },
+    {
+      "__comment":  "rice-cooker",
+      "file": "minecraft:gui/rice-cooker.png",
+      "chars": [
+        "\uf003"
+      ],
+      "height": 135,
+      "ascent": 13,
+      "type": "bitmap"
+    },
+
+
+
+
+    {
+      "__comment": "test rice-cooker offset",
+      "file": "minecraft:gui/pixel.png",
+      "chars": [
+        "\uf004"
+      ],
+      "height": -176,
+      "ascent": -2147483648,
+      "type": "bitmap"
+    },
+
+    {
+      "__comment":  "rice-cooker",
+      "file": "minecraft:gui/pixel.png",
+      "chars": [
+        "\uf005"
+      ],
+      "height": 141,
+      "ascent": 120,
+      "type": "bitmap"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/crop",
+  "ambientocclusion": false,
+  "textures": {
+    "crop": "minecraft:block/rice_stage5"
+  }
+}

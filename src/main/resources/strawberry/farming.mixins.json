@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "net.orandja.strawberry.mods.farming.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "ChocoFlavorInit"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

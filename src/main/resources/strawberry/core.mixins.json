@@ -1,0 +1,20 @@
+{
+  "required": true,
+  "package": "net.orandja.strawberry.mods.core.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "BiMapPaletteMixin",
+    "BlockUpdateS2CPacketMixin",
+    "ChocoFlavorInit",
+    "PacketByteBufMixin",
+    "ChunkDataMixin",
+    "ChunkDeltaUpdateS2CPacketMixin",
+    "DirectRegistryPacketHandlerMixin",
+    "ArrayPaletteMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

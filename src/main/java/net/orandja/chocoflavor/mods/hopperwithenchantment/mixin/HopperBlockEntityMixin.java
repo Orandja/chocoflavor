@@ -61,7 +61,7 @@ public abstract class HopperBlockEntityMixin extends LockableContainerBlockEntit
         }
     }
 
-    // Extracting from a Hopper with FILTER property
+    // Extracting from note Hopper with FILTER property
     @Inject(method = "extract(Lnet/minecraft/world/World;Lnet/minecraft/block/entity/Hopper;)Z",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/block/entity/HopperBlockEntity;isInventoryEmpty(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/util/math/Direction;)Z", shift = At.Shift.BEFORE),
         cancellable = true

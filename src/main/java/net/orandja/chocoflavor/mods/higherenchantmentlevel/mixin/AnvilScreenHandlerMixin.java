@@ -1,5 +1,6 @@
 package net.orandja.chocoflavor.mods.higherenchantmentlevel.mixin;
 
+import net.minecraft.block.EnchantingTableBlock;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;

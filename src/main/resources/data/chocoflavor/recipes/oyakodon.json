@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "E": {
+      "item": "minecraft:egg"
+    },
+    "C": {
+      "item": "minecraft:cooked_chicken"
+    },
+    "R": {
+      "item": "minecraft:cooked_rice"
+    },
+    "B": {
+      "item": "minecraft:bowl"
+    }
+  },
+  "pattern": [
+    " EC",
+    " R ",
+    " B "
+  ],
+  "result": {
+    "item": "minecraft:oyakodon"
+  },
+  "show_notification": true
+}

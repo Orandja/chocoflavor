@@ -40,8 +40,13 @@
 		"mixins/kelpfix.mixins.json",
 		"mixins/nerfedentity.mixins.json",
 		"mixins/transferenchant.mixins.json",
-		"mixins/whitelistedchestblock.mixins.json"
+		"mixins/whitelistedchestblock.mixins.json",
+
+		"strawberry/core.mixins.json",
+		"strawberry/core.ac.mixins.json",
+		"strawberry/farming.mixins.json"
 	],
+	"accessWidener" : "chocoflavor.accesswidener",
 	"depends": {
 		"fabricloader": ">=0.14.22",
 		"minecraft": "~1.20.2",
