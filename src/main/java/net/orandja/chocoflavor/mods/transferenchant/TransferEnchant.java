@@ -36,7 +36,7 @@ public interface TransferEnchant {
 
         @Override
         public boolean canInsert(ItemStack stack) {
-            return stack.isDamageable() || stack.isOf(Items.ENCHANTED_BOOK) || StackUtils.hasAnyEnchanments(stack) || stack.isOf(Items.BOOK);
+            return stack.isDamageable() || stack.isOf(Items.ENCHANTED_BOOK) || StackUtils.hasAnyEnchantments(stack) || stack.isOf(Items.BOOK);
         }
     }
 
@@ -152,7 +152,7 @@ public interface TransferEnchant {
 
         public boolean getBookAndToolSlots(BiConsumer<Integer, Integer> consumer) {
             int bookSlot = getSlot(stack -> stack.isOf(Items.BOOK));
-            int toolSlot = getSlot(StackUtils::hasAnyEnchanments);
+            int toolSlot = getSlot(StackUtils::hasAnyEnchantments);
             if (bookSlot > -1 && toolSlot > -1) {
                 consumer.accept(bookSlot, toolSlot);
                 return true;

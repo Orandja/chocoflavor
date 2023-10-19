@@ -12,8 +12,10 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.network.packet.s2c.play.BlockUpdateS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -106,7 +108,8 @@ public interface WhitelistedChestBlock {
     default void notifyPlayer(PlayerEntity player, CallbackInfoReturnable<ActionResult> info) {
         if(!isWhitelisted(player)) {
             String players = getWhitelist().stream().map(PlayerUtils::getUsernameFromUUID).collect(Collectors.joining(","));
-            player.sendMessage(Text.of("[{\"text\":\"Whitelisted for: \",\"color\":\"red\"},{\"text\":\""+ players +"\",\"color\":\"green\"}]"), true);
+            player.sendMessage(Text.literal("Whitelisted for: ").formatted(Formatting.RED, Formatting.BOLD).append(Text.literal("").formatted(Formatting.RESET)).append(Text.literal(players).formatted(Formatting.GREEN)));
+//            player.sendMessage(Text.of("[{\"text\":\"Whitelisted for: \",\"color\":\"red\"},{\"text\":\""+ players +"\",\"color\":\"green\"}]"), true);
             info.setReturnValue(ActionResult.SUCCESS);
         }
     }
