@@ -36,9 +36,9 @@ public interface FasterMobSpawner {
             long playerCount = world.getPlayers(EntityPredicates.EXCEPT_SPECTATOR).stream().filter(EntityPredicates.VALID_LIVING_ENTITY).filter(MathUtils.inRange(pos, requiredDistance)).count();
 
             // for debugging when alone.
-            Box box = BOX.offset(pos).expand(10, 10, 10);
-            List<ArmorStandEntity> armorstands = world.getNonSpectatingEntities(ArmorStandEntity.class, box);
-            playerCount += armorstands.size();
+//            Box box = BOX.offset(pos).expand(10, 10, 10);
+//            List<ArmorStandEntity> armorstands = world.getNonSpectatingEntities(ArmorStandEntity.class, box);
+//            playerCount += armorstands.size();
             setDelayReduction((int) Math.max(1, Math.pow(3, (playerCount - 1))));
         }
 

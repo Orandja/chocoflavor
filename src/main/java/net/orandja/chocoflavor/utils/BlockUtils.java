@@ -5,6 +5,8 @@ import net.minecraft.registry.tag.BlockTags;
 import net.orandja.chocoflavor.ChocoFlavor;
 import net.orandja.chocoflavor.mods.doubletools.mixin.ChocoFlavorInit;
 
+import java.util.Objects;
+
 public abstract class BlockUtils {
 
     public static boolean isOre(Block block) {
@@ -12,7 +14,7 @@ public abstract class BlockUtils {
     }
 
     public static boolean isOreAndTheSame(Block block1, Block block2) {
-        return isOre(block1) && block2 == block1;
+        return isOre(block1) && Objects.equals(block2, block1);
     }
 
     public static boolean isOre(BlockState state) {
@@ -32,7 +34,7 @@ public abstract class BlockUtils {
     }
 
     public static boolean isWoodAndTheSame(BlockState state1, BlockState state2) {
-        return isWood(state1) && state1.getBlock() == state2.getBlock();
+        return isWood(state1) && Objects.equals(state1.getBlock(), state2.getBlock());
     }
 
 }

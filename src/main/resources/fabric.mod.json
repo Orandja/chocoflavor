@@ -31,7 +31,6 @@
 		"mixins/deathmessage.mixins.json",
 		"mixins/deepstoragebarrel.mixins.json",
 		"mixins/doubletools.mixins.json",
-		"mixins/editsign.mixins.json",
 		"mixins/fastermobspawner.mixins.json",
 		"mixins/furnacewithenchantment.mixins.json",
 		"mixins/higherenchantmentlevel.mixins.json",

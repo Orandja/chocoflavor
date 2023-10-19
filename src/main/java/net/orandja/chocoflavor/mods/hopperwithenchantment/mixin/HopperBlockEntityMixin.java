@@ -109,7 +109,7 @@ public abstract class HopperBlockEntityMixin extends LockableContainerBlockEntit
     private static void checkForMending(Inventory from, Inventory to, ItemStack stack, Direction side, CallbackInfoReturnable<ItemStack> info) {
         BlockWithEnchantment.compute(from, HopperWithEnchantment.class, OUTPUT.getValue(), it -> {
             if(from instanceof HopperBlockEntity hopper) {
-                int redstonePower = hopper.getWorld().getReceivedRedstonePower(hopper.getPos()) - 1;
+                int redstonePower = hopper.getWorld().getReceivedRedstonePower(hopper.getPos());
                 if(redstonePower > 0) {
                     info.setReturnValue(transfer(from, to, stack, redstonePower - 1, side));
                 } else {

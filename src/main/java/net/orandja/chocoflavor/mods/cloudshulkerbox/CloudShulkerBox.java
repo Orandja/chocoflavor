@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.RecipeInputInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.context.LootContextParameter;
 import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.nbt.NbtCompound;
@@ -96,6 +97,7 @@ public interface CloudShulkerBox {
                 channel = "public:" + channel;
             }
 
+            output.setCustomName(Text.Serializer.fromJson("{\"text\":\"[Cloud Box] \",\"color\":\"green\"}"));
             NbtCompound tag = output.getOrCreateNbt();
             tag.putString("vw_channel", channel);
             tag.putString("vw_channel_literal", channelLiteral);
@@ -322,13 +324,13 @@ public interface CloudShulkerBox {
     }
 
     default void lootCloud(BiStacksSupplier getStacks, BlockState state, LootContextParameterSet.Builder builder, CallbackInfoReturnable<List<ItemStack>> info) {
-        LootContextParameterSet parameters = ((LootContextBuilderAccessor)builder).getParameters();
+        Map<LootContextParameter<?>, Object> parameters = ((LootContextBuilderAccessor)builder).getParameters();
         if(parameters != null && parameters.get(LootContextParameters.BLOCK_ENTITY) instanceof CloudShulkerBox cloudBox) {
             if(!cloudBox.hasChannel()) {
                 return;
             }
 
-            if(!cloudBox.isPublic() && !cloudBox.isOwned(parameters.get(LootContextParameters.THIS_ENTITY))) {
+            if(!cloudBox.isPublic() && !cloudBox.isOwned((Entity) parameters.get(LootContextParameters.THIS_ENTITY))) {
                 return;
             }
 

@@ -9,8 +9,8 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.util.Pair;
 import net.minecraft.util.collection.DefaultedList;
-import net.orandja.chocoflavor.ChocoFlavor;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public abstract class StackUtils {
@@ -19,14 +19,14 @@ public abstract class StackUtils {
         return canMerge(into, from, from.getCount());
     }
     public static boolean canMerge(ItemStack into, ItemStack from, int countFromSecond) {
-        return (into.getItem() == from.getItem()) && (into.getDamage() == from.getDamage()) && ((into.getCount() + countFromSecond) <= into.getMaxCount()) && into.getNbt().equals(from.getNbt());
+        return Objects.equals(into.getItem(), from.getItem()) && Objects.equals(into.getDamage(), from.getDamage()) && ((into.getCount() + countFromSecond) <= into.getMaxCount()) && Objects.equals(into.getNbt(), from.getNbt());
     }
 
     public static boolean isGonnaBreak(ItemStack stack) {
         return stack.isEmpty() || stack.getDamage() >= (stack.getMaxDamage() - 2);
     }
 
-    public static boolean areGonnaBreak(ItemStack... stacks) {
+    public static boolean anyGonnaBreak(ItemStack... stacks) {
         for(ItemStack stack: stacks) {
             if(isGonnaBreak(stack)) {
                 return true;
@@ -36,8 +36,8 @@ public abstract class StackUtils {
         return false;
     }
 
-    public static boolean areGonnaBreak(Pair<ItemStack, ItemStack> stacksInHands) {
-        return areGonnaBreak(stacksInHands.getLeft(), stacksInHands.getRight());
+    public static boolean anyGonnaBreak(Pair<ItemStack, ItemStack> stacksInHands) {
+        return anyGonnaBreak(stacksInHands.getLeft(), stacksInHands.getRight());
     }
 
     public static boolean isCompatible(ItemStack stack, ItemStack other) {
@@ -49,7 +49,7 @@ public abstract class StackUtils {
                 (isSimilar(stack, other) && (!checkSize || stack.getCount() < stack.getMaxCount()));
     }
 
-    public static boolean hasAnyEnchanments(ItemStack stack) {
+    public static boolean hasAnyEnchantments(ItemStack stack) {
         if (stack.getNbt() != null && stack.getNbt().contains("StoredEnchantments", NbtElement.LIST_TYPE)) {
             NbtList list = stack.getNbt().getList("StoredEnchantments", NbtElement.COMPOUND_TYPE);
             return !list.isEmpty() && list.size() > 0;
@@ -59,7 +59,7 @@ public abstract class StackUtils {
     }
 
     public static boolean isSimilar(ItemStack stack, ItemStack other) {
-        return stack.getItem() == other.getItem() && stack.getNbt().equals(other.getNbt());
+        return Objects.equals(stack.getItem(), other.getItem()) && Objects.equals(stack.getNbt(), other.getNbt());
 //        return stack.isItemEqual(other) && ItemStack.areNbtEqual(stack, other);
     }
 
@@ -113,14 +113,14 @@ public abstract class StackUtils {
         consumer.accept(stack.getOrCreateNbt());
     }
     public static boolean isOfItem(ItemStack stack, Item item) {
-        return !stack.isEmpty() && stack.getItem() == item;
+        return !stack.isEmpty() && Objects.equals(stack.getItem(), item);
     }
     public static boolean isOfItem(ItemStack stack1, ItemStack stack2) {
         return isOfItem(stack1, stack2.getItem());
     }
 
     public static boolean ofStack(Item item, ItemStack stack) {
-        return !stack.isEmpty() && item == stack.getItem();
+        return !stack.isEmpty() && Objects.equals(item, stack.getItem());
     }
 
     public static void computeLore(ItemStack stack, Consumer<NbtList> consumer) {

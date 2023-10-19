@@ -51,6 +51,7 @@ public interface AnimalTemptation {
         TEMPTATIONS.put(StriderEntity.class, it -> new Pair<>(3, new TemptItemGoal(it, 1.25, ((StriderEntity)it)::isBreedingItem)));
         TEMPTATIONS.put(GoatEntity.class, it -> new Pair<>(3, new TemptItemGoal(it, 1.25, ((GoatEntity)it)::isBreedingItem)));
         TEMPTATIONS.put(HoglinEntity.class, it -> new Pair<>(3, new TemptItemGoal(it, 1.25, ((HoglinEntity)it)::isBreedingItem)));
+        TEMPTATIONS.put(SnifferEntity.class, it -> new Pair<>(3, new TemptItemGoal(it, 1.25, ((SnifferEntity)it)::isBreedingItem)));
     }
 
     GoalSelector vw$_getGoalSelector();
