@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class OverlayedScreenHandler extends ScreenHandler {
     private static final int NUM_COLUMNS = 9;
@@ -23,8 +24,10 @@ public class OverlayedScreenHandler extends ScreenHandler {
     private final Inventory realInventory;
     private final int rows;
 
+    public static final String[] beginOfName = new String[] {"\uf002"};
+    public static final String[] endOfName = new String[] {"\uf010"};
     public static MutableText getName(String... chars) {
-        return ((MutableText) Text.of(Arrays.stream(chars).map(it -> it.toCharArray()[0] + "").collect(Collectors.joining("")))).formatted(Formatting.WHITE);
+        return ((MutableText) Text.of(Stream.of(beginOfName, chars, endOfName).flatMap(Stream::of).map(it -> it.toCharArray()[0] + "").collect(Collectors.joining("")))).formatted(Formatting.WHITE);
     }
 
     public OverlayedScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory, Inventory inventory, int rows, RedirectSlot... slots) {

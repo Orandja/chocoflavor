@@ -4,9 +4,9 @@ import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.orandja.strawberry.mods.core.intf.ItemStackTransformer;
+import net.orandja.strawberry.mods.core.intf.StrawberryItem;
 
-public class SimpleBlockItem extends BlockItem implements ItemStackTransformer {
+public class SimpleBlockItem extends BlockItem implements StrawberryItem {
 
     private final String name;
     private final int customDataModel;
@@ -18,7 +18,12 @@ public class SimpleBlockItem extends BlockItem implements ItemStackTransformer {
     }
 
     @Override
-    public ItemStack create(ItemStack sourceStack) {
-        return create(sourceStack, Items.NOTE_BLOCK, this.customDataModel, name);
+    public ItemStack transform(ItemStack sourceStack) {
+        return transform(sourceStack, Items.NOTE_BLOCK, this.customDataModel, name);
+    }
+
+    @Override
+    public void register() {
+        /* Ignore item registration since we use NoteBlocks */
     }
 }

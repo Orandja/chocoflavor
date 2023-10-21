@@ -4,28 +4,22 @@ import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.packet.s2c.play.ScreenHandlerSlotUpdateS2CPacket;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
-import net.minecraft.recipe.BrewingRecipeRegistry;
 import net.minecraft.screen.*;
-import net.minecraft.screen.slot.FurnaceFuelSlot;
-import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.orandja.chocoflavor.ChocoFlavor;
-import net.orandja.chocoflavor.utils.MathUtils;
-import net.orandja.strawberry.mods.core.intf.ItemStackTransformer;
+import net.orandja.strawberry.mods.core.intf.StrawberryItem;
 import net.orandja.strawberry.mods.core.screen.OverlayedScreenHandler;
 import net.orandja.strawberry.mods.core.screen.RedirectOutputSlot;
 import net.orandja.strawberry.mods.core.screen.RedirectSlot;
 
 public class BoilerScreenHandler extends OverlayedScreenHandler {
 
-    public static final ItemStack PROGRESS_0_21 = ItemStackTransformer.createCustomNamedStack(new ItemStack(Items.BARRIER), 10021, "");
-    public static final ItemStack PROGRESS_15_21 = ItemStackTransformer.createCustomNamedStack(new ItemStack(Items.BARRIER), 11521, "");
+    public static final ItemStack PROGRESS_0_21 = StrawberryItem.createStrawberryStack(Items.BARRIER, 10021, "");
+    public static final ItemStack PROGRESS_15_21 = StrawberryItem.createStrawberryStack(Items.BARRIER, 11521, "");
 
     public final PlayerEntity player;
 

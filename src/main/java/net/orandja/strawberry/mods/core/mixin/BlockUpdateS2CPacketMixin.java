@@ -5,7 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.packet.s2c.play.BlockUpdateS2CPacket;
-import net.orandja.strawberry.mods.core.intf.BlockStateTransformer;
+import net.orandja.strawberry.mods.core.intf.StrawberryBlockState;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,7 +20,7 @@ public class BlockUpdateS2CPacketMixin {
 
     @Inject(method = "write", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/PacketByteBuf;writeRegistryValue(Lnet/minecraft/util/collection/IndexedIterable;Ljava/lang/Object;)V", shift = At.Shift.BEFORE), cancellable = true)
     public void writeCustomBlock(PacketByteBuf buf, CallbackInfo info) {
-        if(state.getBlock() instanceof BlockStateTransformer blockStateTransformer) {
+        if(state.getBlock() instanceof StrawberryBlockState blockStateTransformer) {
             buf.writeRegistryValue(Block.STATE_IDS, blockStateTransformer.transform(state));
             info.cancel();
             return;

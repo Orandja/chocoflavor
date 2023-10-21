@@ -68,7 +68,7 @@ public class BoilerBlockEntity extends LockableContainerBlockEntity implements C
 
     @Override
     protected Text getContainerName() {
-        return OverlayedScreenHandler.getName("\uf002", "\uf003");
+        return OverlayedScreenHandler.getName("\uf003").append("\\n test");
     }
 
     @Override

@@ -43,7 +43,8 @@
 
 		"strawberry/core.mixins.json",
 		"strawberry/core.ac.mixins.json",
-		"strawberry/farming.mixins.json"
+		"strawberry/farming.mixins.json",
+		"strawberry/pack.mixins.json"
 	],
 	"accessWidener" : "chocoflavor.accesswidener",
 	"depends": {

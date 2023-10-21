@@ -5,7 +5,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.DecoratedPotBlockEntity;
 import net.minecraft.datafixer.TypeReferences;
 import net.minecraft.item.FoodComponents;
 import net.minecraft.item.Item;

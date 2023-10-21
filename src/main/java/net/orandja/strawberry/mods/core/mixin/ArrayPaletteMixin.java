@@ -2,19 +2,12 @@ package net.orandja.strawberry.mods.core.mixin;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.encoding.VarInts;
 import net.minecraft.util.collection.IndexedIterable;
 import net.minecraft.world.chunk.ArrayPalette;
-import net.orandja.chocoflavor.ChocoFlavor;
-import net.orandja.strawberry.mods.core.intf.BlockStateTransformer;
-import org.spongepowered.asm.mixin.Final;
+import net.orandja.strawberry.mods.core.intf.StrawberryBlockState;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ArrayPalette.class)
 public class ArrayPaletteMixin<T> {
@@ -55,7 +48,7 @@ public class ArrayPaletteMixin<T> {
     @Redirect(method = "writePacket", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/collection/IndexedIterable;getRawId(Ljava/lang/Object;)I"))
     public int writeCustomPacket(IndexedIterable instance, T t) {
         if(t instanceof BlockState state) {
-            if(state.getBlock() instanceof BlockStateTransformer blockStateTransformer) {
+            if(state.getBlock() instanceof StrawberryBlockState blockStateTransformer) {
                 return instance.getRawId(blockStateTransformer.transform(state));
             }
             if(state.getBlock().equals(Blocks.NOTE_BLOCK)) {
@@ -69,7 +62,7 @@ public class ArrayPaletteMixin<T> {
     @Redirect(method = "getPacketSize", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/collection/IndexedIterable;getRawId(Ljava/lang/Object;)I"))
     public int getCustomPacketSize(IndexedIterable instance, T t) {
         if(t instanceof BlockState state) {
-            if(state.getBlock() instanceof BlockStateTransformer blockStateTransformer) {
+            if(state.getBlock() instanceof StrawberryBlockState blockStateTransformer) {
                 return instance.getRawId(blockStateTransformer.transform(state));
             }
             if(state.getBlock().equals(Blocks.NOTE_BLOCK)) {

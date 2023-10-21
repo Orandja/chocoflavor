@@ -9,15 +9,13 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.collection.IndexedIterable;
-import net.orandja.chocoflavor.ChocoFlavor;
-import net.orandja.strawberry.mods.core.intf.BlockStateTransformer;
-import net.orandja.strawberry.mods.core.intf.ItemStackTransformer;
+import net.orandja.strawberry.mods.core.intf.StrawberryBlockState;
+import net.orandja.strawberry.mods.core.intf.StrawberryItem;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -36,8 +34,8 @@ public abstract class PacketByteBufMixin {
 
     @Inject(method = "writeItemStack", at = @At("HEAD"), cancellable = true)
     public void writeCustomItemStack(ItemStack stack, CallbackInfoReturnable<PacketByteBuf> info) {
-        if(stack.getItem() instanceof ItemStackTransformer itemStackTransformer) {
-            ItemStack customStack = itemStackTransformer.create(stack);
+        if(stack.getItem() instanceof StrawberryItem itemStackTransformer) {
+            ItemStack customStack = itemStackTransformer.transform(stack);
             this.writeBoolean(true);
             Item item = customStack.getItem();
             this.writeRegistryValue(Registries.ITEM, item);
@@ -54,7 +52,7 @@ public abstract class PacketByteBufMixin {
 
     @Inject(method = "writeRegistryValue", at = @At("HEAD"), cancellable = true)
     public <T> void writeCustomBlockState(IndexedIterable<T> registry, T value, CallbackInfo info) {
-        if(value instanceof BlockState state && state.getBlock() instanceof BlockStateTransformer blockStateTransformer) {
+        if(value instanceof BlockState state && state.getBlock() instanceof StrawberryBlockState blockStateTransformer) {
             int i = registry.getRawId((T) blockStateTransformer.transform(state));
             if (i == -1) {
                 throw new IllegalArgumentException("Can't find id for '" + value + "' in map " + registry);
