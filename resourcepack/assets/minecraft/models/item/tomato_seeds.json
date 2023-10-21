@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "minecraft:item/rice_seeds"
+    "layer0": "item/Tomato seeds"
   }
 }

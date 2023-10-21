@@ -6,25 +6,25 @@
   "overrides": [
     {
       "predicate": {
-        "custom_model_data": 1
+        "custom_model_data": "item/1"
       },
       "model": "minecraft:item/cooked_rice"
     },
     {
       "predicate": {
-        "custom_model_data": 2
+        "custom_model_data": "item/2"
       },
       "model": "minecraft:item/cabbage_leaf"
     },
     {
       "predicate": {
-        "custom_model_data": 3
+        "custom_model_data": "item/3"
       },
       "model": "minecraft:item/onion"
     },
     {
       "predicate": {
-        "custom_model_data": 4
+        "custom_model_data": "item/4"
       },
       "model": "minecraft:item/tomato"
     }
