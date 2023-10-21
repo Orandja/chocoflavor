@@ -6,6 +6,7 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.util.Pair;
 import net.minecraft.util.collection.DefaultedList;
+import net.orandja.chocoflavor.mods.doubletools.DoubleTools;
 
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -128,6 +129,10 @@ public abstract class StackUtils {
 
     public static ToolMaterial getToolMaterial(ItemStack stack) {
         if(stack.getItem() instanceof ToolItem tool) {
+            return tool.getMaterial();
+        }
+
+        if(stack.getItem() instanceof DoubleTools.Applicable tool) {
             return tool.getMaterial();
         }
 

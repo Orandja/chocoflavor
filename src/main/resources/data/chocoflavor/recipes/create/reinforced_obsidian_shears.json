@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "S#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:reinforced_obsidian"
+    },
+    "S": {
+      "item": "minecraft:shears"
+    }
+  },
+  "result": {
+    "item": "minecraft:reinforced_obsidian_shears",
+    "count": 1
+  }
+}

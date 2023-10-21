@@ -74,8 +74,14 @@ public class CustomToolMaterial implements ToolMaterial {
         return this.enchantingCheck.test(enchantment, itemStack);
     }
 
-    public void modifyStack(ItemStack stack, ToolItem replacementItem) {
-        stack.setDamage(StackUtils.convertDurability(stack, replacementItem));
+//    public void modifyStack(ItemStack stack, ToolItem replacementItem) {
+//        stack.setDamage(StackUtils.convertDurability(stack, replacementItem));
+//        stack.addHideFlag(ItemStack.TooltipSection.MODIFIERS);
+//        TextUtils.addDurability(stack.getOrCreateNbt(), stack.getDamage(), stack.getMaxDamage());
+//    }
+
+    public void modifyStack(ItemStack stack, Item replacementItem) {
+        stack.setDamage(StackUtils.convertDurability(stack, replacementItem.getMaxDamage()));
         stack.addHideFlag(ItemStack.TooltipSection.MODIFIERS);
         TextUtils.addDurability(stack.getOrCreateNbt(), stack.getDamage(), stack.getMaxDamage());
     }

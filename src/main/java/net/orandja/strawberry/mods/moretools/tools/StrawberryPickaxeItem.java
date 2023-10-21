@@ -34,7 +34,7 @@ public class StrawberryPickaxeItem extends PickaxeItem implements StrawberryItem
     public ItemStack transform(ItemStack sourceStack) {
         return Utils.apply(transform(sourceStack, this.replacementItem, this.customDataModel), it -> {
             if(this.getMaterial() instanceof CustomToolMaterial material) {
-                material.modifyStack(it, this.replacementItem);
+                material.modifyStack(sourceStack, this.replacementItem);
             }
         });
     }

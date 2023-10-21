@@ -19,7 +19,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.orandja.chocoflavor.ChocoFlavor;
 import net.orandja.chocoflavor.mods.core.InventoryInteract;
 import net.orandja.chocoflavor.utils.BlockUtils;
 import net.orandja.chocoflavor.utils.MathUtils;
@@ -34,6 +33,10 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public interface DoubleTools {
+
+    interface Applicable {
+        ToolMaterial getMaterial();
+    }
 
     interface ToolUser {
         HashMap<Item, ToolTask> getToolTasks();

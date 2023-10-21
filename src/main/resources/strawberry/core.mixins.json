@@ -14,8 +14,7 @@
     "ServerPlayerInteractionManagerMixin",
     "ServerPlayerEntityMixin",
     "MarkerEntityMixin",
-    "ServerChunkManagerMixin",
-    "AnvilScreenHandlerMixin"
+    "ServerChunkManagerMixin"
   ],
   "client": [
   ],

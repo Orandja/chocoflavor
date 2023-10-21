@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "items": [
+              "minecraft:shears",
+              "minecraft:copper_shears",
+              "minecraft:crying_obsidian_shears",
+              "minecraft:diamond_shears",
+              "minecraft:netherite_shears",
+              "minecraft:obsidian_shears",
+              "minecraft:reinforced_obsidian_shears"
+            ]
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:nether_sprouts"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "minecraft:blocks/nether_sprouts"
+}

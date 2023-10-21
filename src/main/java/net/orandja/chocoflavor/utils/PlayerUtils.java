@@ -18,7 +18,9 @@ public abstract class PlayerUtils {
     }
 
     public static boolean areBothTools(PlayerEntity player, Class<?> clazz) {
-        return clazz.isInstance(player.getMainHandStack().getItem()) && clazz.isInstance(player.getOffHandStack().getItem()) && StackUtils.getToolMaterial(player.getMainHandStack()) == StackUtils.getToolMaterial(player.getOffHandStack());
+        return clazz.isAssignableFrom(player.getMainHandStack().getItem().getClass()) &&
+                clazz.isAssignableFrom(player.getOffHandStack().getItem().getClass()) &&
+                StackUtils.getToolMaterial(player.getMainHandStack()) == StackUtils.getToolMaterial(player.getOffHandStack());
     }
 
     public static void tryBreakBlock(PlayerEntity player, BlockPos pos) {

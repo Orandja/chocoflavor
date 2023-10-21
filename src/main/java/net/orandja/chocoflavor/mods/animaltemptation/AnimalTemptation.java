@@ -28,7 +28,7 @@ public interface AnimalTemptation {
     Map<Class<? extends AnimalEntity>, AnimalItemGoal> TEMPTATIONS = Maps.newHashMap();
 
     static void getTemptation(AnimalEntity animal, Consumer<AnimalItemGoal> consumer) {
-        TEMPTATIONS.keySet().stream().filter(clazz -> animal.getClass().isAssignableFrom(clazz) || animal.getClass() == clazz)
+        TEMPTATIONS.keySet().stream().filter(clazz -> clazz.isAssignableFrom(animal.getClass()) || animal.getClass() == clazz)
                 .findFirst().ifPresent(animalEntityClass -> consumer.accept(TEMPTATIONS.get(animalEntityClass)));
     }
 

@@ -7,10 +7,7 @@ import net.minecraft.block.MapColor;
 import net.minecraft.block.enums.Instrument;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Util;
@@ -115,6 +112,14 @@ public class MoreTools {
     public static Item REINFORCED_OBSIDIAN_LEGGINGS;
     public static Item REINFORCED_OBSIDIAN_BOOTS;
 
+
+    public static Item COPPER_SHEARS;
+    public static Item CRYING_OBSIDIAN_SHEARS;
+    public static Item DIAMOND_SHEARS;
+    public static Item NETHERITE_SHEARS;
+    public static Item OBSIDIAN_SHEARS;
+    public static Item REINFORCED_OBSIDIAN_SHEARS;
+
     public static void beforeLaunch() {
         //Bucket
 
@@ -166,5 +171,16 @@ public class MoreTools {
             it.mapColor(MapColor.BLACK).instrument(Instrument.BASEDRUM).requiresTool().strength(150.0f, 1200.0f);
         }));
         REINFORCED_OBSIDIAN_ITEM = Items.register(new SimpleBlockItem(REINFORCED_OBSIDIAN, 24, new Item.Settings()));
+
+
+        /**
+         * TODO: ADD TO ENCHANT
+         */
+        COPPER_SHEARS = Items.register("copper_shears", new StrawberryShearsItem(COPPER_TOOL_MATERIAL, 1));
+        CRYING_OBSIDIAN_SHEARS = Items.register("crying_obsidian_shears", new StrawberryShearsItem(CRYING_OBSIDIAN_TOOL_MATERIAL, 2));
+        DIAMOND_SHEARS = Items.register("diamond_shears", new StrawberryShearsItem(ToolMaterials.DIAMOND, 3));
+        NETHERITE_SHEARS = Items.register("netherite_shears", new StrawberryShearsItem(ToolMaterials.NETHERITE, 4));
+        OBSIDIAN_SHEARS = Items.register("obsidian_shears", new StrawberryShearsItem(OBSIDIAN_TOOL_MATERIAL, 5));
+        REINFORCED_OBSIDIAN_SHEARS = Items.register("reinforced_obsidian_shears", new StrawberryShearsItem(REINFORCED_OBSIDIAN_TOOL_MATERIAL, 6));
     }
 }

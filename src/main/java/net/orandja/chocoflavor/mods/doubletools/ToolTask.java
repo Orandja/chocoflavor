@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import net.orandja.chocoflavor.utils.BlockUtils;
 import net.orandja.chocoflavor.utils.BlockZone;
 import net.orandja.chocoflavor.utils.StackUtils;
+import net.orandja.chocoflavor.utils.Utils;
 
 import java.util.Map;
 import java.util.Optional;
@@ -19,7 +20,7 @@ import java.util.function.Consumer;
 public class ToolTask {
 
     public static ToolTask defaultFor(ItemStack stack) {
-        Optional<Map.Entry<Class<?>, ToolTask[]>> first = validModes.entrySet().stream().filter(it -> stack.getItem().getClass().isAssignableFrom(it.getKey())).findFirst();
+        Optional<Map.Entry<Class<?>, ToolTask[]>> first = validModes.entrySet().stream().filter(it -> it.getKey().isAssignableFrom(stack.getItem().getClass())).findFirst();
         return first.isPresent() ? first.get().getValue()[0] : TASK_ALL;
     }
 

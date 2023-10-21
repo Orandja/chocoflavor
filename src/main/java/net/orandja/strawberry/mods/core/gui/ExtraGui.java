@@ -156,7 +156,7 @@ public interface ExtraGui {
     }
 
     static <T extends MutableText> T appendGUIPositiveHalfOffset(T mainText, Text guiName, String translationKey) {
-        if(guiName.getContent().getClass().isAssignableFrom(TranslatableTextContent.class)) {
+        if(TranslatableTextContent.class.isAssignableFrom(guiName.getContent().getClass())) {
             mainText.append(Text.translatable(translationKey + ".offset_pos_half"));
         } else {
             int width = ExtraGui.getWidth(guiName.getString());
@@ -169,7 +169,7 @@ public interface ExtraGui {
     }
 
     static <T extends MutableText> T appendGUINegativeHalfOffset(T mainText, Text guiName, String translationKey) {
-        if(guiName.getContent().getClass().isAssignableFrom(TranslatableTextContent.class)) {
+        if(TranslatableTextContent.class.isAssignableFrom(guiName.getContent().getClass())) {
             mainText.append(Text.translatable(translationKey + ".offset_neg_half"));
         } else {
             int width = ExtraGui.getWidth(guiName.getString());
@@ -200,7 +200,7 @@ public interface ExtraGui {
     }
 
     static <T extends MutableText> T appendGUIPositiveOffset(T mainText, Text guiName, String translationKey) {
-        if(guiName.getContent().getClass().isAssignableFrom(TranslatableTextContent.class)) {
+        if(TranslatableTextContent.class.isAssignableFrom(guiName.getContent().getClass())) {
             mainText.append(Text.translatable(translationKey + ".offset_pos"));
         } else {
             int width = ExtraGui.getWidth(guiName.getString());
@@ -213,7 +213,7 @@ public interface ExtraGui {
     }
 
     static <T extends MutableText> T appendGUINegativeOffset(T mainText, Text guiName, String translationKey) {
-        if(guiName.getContent().getClass().isAssignableFrom(TranslatableTextContent.class)) {
+        if(TranslatableTextContent.class.isAssignableFrom(guiName.getContent().getClass())) {
             mainText.append(Text.translatable(translationKey + ".offset_neg"));
         } else {
             int width = ExtraGui.getWidth(guiName.getString());
