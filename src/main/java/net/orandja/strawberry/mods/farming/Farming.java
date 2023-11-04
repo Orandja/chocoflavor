@@ -89,7 +89,7 @@ public class Farming {
         //Blocks
         BOILER = Blocks.register("boiler", new BoilerBlock());
         BOILER_ENTITY = createBlockEntity("boiler", BlockEntityType.Builder.create(BoilerBlockEntity::new, BOILER));
-        BOILER_ITEM = Items.register(new SimpleBlockItem(BOILER, "Boiler", 17, new Item.Settings()));
+        BOILER_ITEM = Items.register(new SimpleBlockItem(BOILER, 17, new Item.Settings()));
     }
 
     private static <T extends BlockEntity> BlockEntityType<T> createBlockEntity(String id, BlockEntityType.Builder<T> builder) {

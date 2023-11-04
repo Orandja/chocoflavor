@@ -4,8 +4,55 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public abstract class MathUtils {
+
+    public static class ConditionalValue<N extends Number>  {
+
+        public enum Modifier {
+            DIVIDE((it, mod) -> it.doubleValue() / mod.doubleValue()),
+            MULTIPLY((it, mod) -> it.doubleValue() * it.doubleValue()),
+            ADD((it, mod) -> it.doubleValue() + it.doubleValue()),
+            SUBSTRACT((it, mod) -> it.doubleValue() - it.doubleValue());
+
+            public interface Operation {
+                Number apply(Number value, Number mod);
+            }
+
+            private final Operation operation;
+
+            Modifier(Operation operation) {
+                this.operation = operation;
+            }
+
+            public <N extends Number> N apply(N value, N modifier) {
+                return (N) this.operation.apply(value, modifier);
+            }
+        }
+
+        private N value;
+
+        public ConditionalValue(N value) {
+            this.value = value;
+        }
+
+        public static <T extends Number> ConditionalValue<T> of(T value) {
+            return new ConditionalValue<T>(value);
+        }
+
+        public ConditionalValue<N> applyModifier(Predicate<N> supplier, Modifier modifier, Supplier<N> value) {
+            if(supplier.test(this.value)) {
+                this.value = modifier.apply(this.value, value.get());
+            }
+
+            return this;
+        }
+
+        public N getValue() {
+            return this.value;
+        }
+    }
 
     public interface GridConsumer {
         void accept(int x, int y);

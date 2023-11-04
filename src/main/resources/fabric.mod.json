@@ -43,10 +43,9 @@
 
 		"strawberry/core.mixins.json",
 		"strawberry/core.ac.mixins.json",
-		"strawberry/farming.mixins.json",
+		"strawberry/moretools.mixins.json",
 		"strawberry/pack.mixins.json"
 	],
-	"accessWidener" : "chocoflavor.accesswidener",
 	"depends": {
 		"fabricloader": ">=0.14.22",
 		"minecraft": "~1.20.2",

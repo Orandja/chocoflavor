@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "net.orandja.strawberry.mods.moretools.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "ChocoFlavorInit",
+    "EnchantmentMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

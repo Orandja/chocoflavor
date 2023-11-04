@@ -21,13 +21,12 @@ public interface FurnaceWithEnchantment extends BlockWithEnchantment {
 
 //    Enchantment[] FUEL = new Enchantment[] { Enchantments.UNBREAKING, Enchantments.FIRE_ASPECT };
     EnchantmentArraySetting FUEL = new EnchantmentArraySetting("furnace.fuel.enchantments", new Enchantment[] { Enchantments.UNBREAKING, Enchantments.FIRE_ASPECT  });
-
     Settings.Number<Double> FUEL_COEF = new Settings.Number<>("furnace.fuel.coef", 0.2D, Double::parseDouble);
 
 //    Enchantment[] OUTPUT = new Enchantment[] { Enchantments.FORTUNE };
-    EnchantmentArraySetting OUTPUT = new EnchantmentArraySetting("furnace.output.enchantments", new Enchantment[] { Enchantments.FORTUNE });
+    EnchantmentArraySetting FORTUNE = new EnchantmentArraySetting("furnace.fortune.enchantments", new Enchantment[] { Enchantments.FORTUNE });
 
-    Enchantment[] VALID_ENCHANTMENTS = BlockWithEnchantment.concat(SPEED.getValue(), FUEL.getValue(), UNDYING_FUEL.getValue(), OUTPUT.getValue());
+    Enchantment[] VALID_ENCHANTMENTS = BlockWithEnchantment.concat(SPEED.getValue(), FUEL.getValue(), UNDYING_FUEL.getValue(), FORTUNE.getValue());
 
     static void beforeLaunch() {
         EnchantMore.addBasic(Items.FURNACE, VALID_ENCHANTMENTS);

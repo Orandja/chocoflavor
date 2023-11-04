@@ -2,6 +2,7 @@ package net.orandja.strawberry.mods.core.mixin;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.network.packet.s2c.play.ChunkDeltaUpdateS2CPacket;
 import net.orandja.strawberry.mods.core.intf.StrawberryBlockState;
 import org.spongepowered.asm.mixin.Mixin;

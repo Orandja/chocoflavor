@@ -1,9 +1,6 @@
 package net.orandja.chocoflavor.utils;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ToolItem;
-import net.minecraft.item.ToolMaterial;
+import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
@@ -135,5 +132,17 @@ public abstract class StackUtils {
         }
 
         return null;
+    }
+
+    public static int convertDurability(ItemStack sourceStack, int convertedMaxDurability) {
+        return (int) Math.ceil((double) (sourceStack.getDamage() * convertedMaxDurability) / sourceStack.getMaxDamage());
+    }
+
+    public static int convertDurability(ItemStack sourceStack, ToolItem convertedItem) {
+        return convertDurability(sourceStack, convertedItem.getMaterial().getDurability());
+    }
+
+    public static int convertDurability(ItemStack sourceStack, ArmorItem convertedItem) {
+        return convertDurability(sourceStack, convertedItem.getMaterial().getDurability(convertedItem.getType()));
     }
 }

@@ -11,7 +11,6 @@ public interface StrawberryBlockState extends CustomRegistry {
     void register();
 
     default void register(int id, String model) {
-        ChocoFlavor.LOGGER.info(id + "; " + model);
         StrawberryResourcePackGenerator.noteblockModels.put(NoteBlockData.fromID(id), "minecraft:block/" + model);
     }
 }

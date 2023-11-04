@@ -33,14 +33,14 @@ public abstract class BrewingStandBlockEntityMixin implements BrewingStandWithEn
     @Redirect(method = "tick", at = @At(value = "FIELD", opcode = Opcodes.PUTFIELD, ordinal = 0, target = "Lnet/minecraft/block/entity/BrewingStandBlockEntity;fuel:I"))
     private static void setFuelCount(BrewingStandBlockEntity entity, int fuel) {
 //        BrewingStandWithEnchantment.addFuelCount(entity, fuel);
-        BlockWithEnchantment.compute(entity, BrewingStandWithEnchantment.class, it -> it.setFuel(fuel + it.getEnchantmentDictionary().computeValue(lvl -> lvl * fuel * 0.2D, FUEL.getValue())));
+        BlockWithEnchantment.compute(entity, BrewingStandWithEnchantment.class, it -> it.setFuel(fuel + it.getEnchantmentDictionary().computeValue(lvl -> lvl * fuel * FUEL_COEF.getValue(), FUEL.getValue())));
     }
 
     @Inject(method = "tick", at = @At(value = "FIELD", shift = At.Shift.AFTER, ordinal = 0, target = "Lnet/minecraft/block/entity/BrewingStandBlockEntity;brewTime:I"))
     private static void accelerate(World world, BlockPos pos, BlockState state, BrewingStandBlockEntity entity, CallbackInfo info) {
 //        BrewingStandWithEnchantment.accelerateBrew(entity);
         BlockWithEnchantment.compute(entity, BrewingStandWithEnchantment.class, it -> it.setBrewTime(MathHelper.clamp(
-                it.getBrewTime() + 1 - Math.max(1, it.getEnchantmentDictionary().computeValue(lvl -> lvl * 2, SPEED.getValue())),
+                it.getBrewTime() + 1 - Math.max(1, it.getEnchantmentDictionary().computeValue(lvl -> lvl * SPEED_COEF.getValue(), SPEED.getValue())),
                 0, 400
         )));
     }

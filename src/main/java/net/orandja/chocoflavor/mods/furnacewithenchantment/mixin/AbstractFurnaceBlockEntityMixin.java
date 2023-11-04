@@ -6,15 +6,17 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
-import net.minecraft.item.Item;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.orandja.chocoflavor.ChocoFlavor;
 import net.orandja.chocoflavor.mods.core.BlockWithEnchantment;
 import net.orandja.chocoflavor.mods.furnacewithenchantment.FurnaceWithEnchantment;
+import net.orandja.chocoflavor.utils.Utils;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -82,6 +84,10 @@ public abstract class AbstractFurnaceBlockEntityMixin extends LockableContainerB
 
     @Inject(method = "tick", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/block/entity/AbstractFurnaceBlockEntity;setLastRecipe(Lnet/minecraft/recipe/RecipeEntry;)V"))
     private static void increaseOutputAmount(World world, BlockPos pos, BlockState state, AbstractFurnaceBlockEntity entity, CallbackInfo info) {
-        BlockWithEnchantment.compute(entity, FurnaceWithEnchantment.class, OUTPUT.getValue(), it -> it.getInventory().get(2).increment(Math.max(0, it.getEnchantmentDictionary().computeValue(lvl -> world.getRandom().nextInt(lvl + 2), OUTPUT.getValue()) - 1)));
+        BlockWithEnchantment.compute(entity, FurnaceWithEnchantment.class, FORTUNE.getValue(), it -> {
+            if(!(it.getInventory().get(2).getItem() instanceof BlockItem)) {
+                it.getInventory().get(2).increment(Math.max(0, it.getEnchantmentDictionary().computeValue(lvl -> world.getRandom().nextInt(lvl + 2), FORTUNE.getValue()) - 1));
+            }
+        });
     }
 }

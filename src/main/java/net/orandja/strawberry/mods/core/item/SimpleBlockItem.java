@@ -4,22 +4,34 @@ import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.NbtCompound;
+import net.orandja.chocoflavor.utils.Utils;
+import net.orandja.strawberry.mods.core.NoteBlockData;
+import net.orandja.strawberry.mods.core.block.StrawberryBlock;
 import net.orandja.strawberry.mods.core.intf.StrawberryItem;
 
 public class SimpleBlockItem extends BlockItem implements StrawberryItem {
 
-    private final String name;
     private final int customDataModel;
+    private final NoteBlockData noteblockData;
 
-    public SimpleBlockItem(Block block, String name, int customDataModel, Settings settings) {
+    public SimpleBlockItem(Block block, int customDataModel, Settings settings) {
         super(block, settings);
-        this.name = name;
         this.customDataModel = customDataModel;
+        this.noteblockData = NoteBlockData.fromID(this.customDataModel);
     }
 
     @Override
     public ItemStack transform(ItemStack sourceStack) {
-        return transform(sourceStack, Items.NOTE_BLOCK, this.customDataModel, name);
+        return Utils.apply(transform(sourceStack, Items.NOTE_BLOCK, this.customDataModel), it -> {
+            it.getOrCreateNbt().put("BlockStateTag", Utils.apply(new NbtCompound(), tag -> {
+                tag.putString("instrument", noteblockData.instrument().asString());
+                tag.putBoolean("powered", noteblockData.powered());
+                tag.putInt("note", noteblockData.note());
+            }));
+        });
+
+
     }
 
     @Override

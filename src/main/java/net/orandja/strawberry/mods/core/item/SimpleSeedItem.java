@@ -23,16 +23,16 @@ public class SimpleSeedItem extends AliasedBlockItem implements StrawberryItem {
     }
 
     public SimpleSeedItem(Block block, String name, Item replacementItem, int customDataModel, Settings settings) {
-        this(block, name, name, replacementItem, customDataModel, settings);
+        this(block, name, null, replacementItem, customDataModel, settings);
     }
 
     @Override
     public ItemStack transform(ItemStack sourceStack) {
-        return transform(sourceStack, this.replacementItem, this.customDataModel, this.name);
+        return transform(sourceStack, this.replacementItem, this.customDataModel);
     }
 
     @Override
     public void register() {
-        register(this.replacementItem, this.customDataModel, Registries.ITEM.getId(this).getPath(), this.texture);
+        register(this.replacementItem, this.customDataModel, Registries.ITEM.getId(this).getPath(), texture == null ? Registries.ITEM.getId(this).getPath() : this.texture);
     }
 }

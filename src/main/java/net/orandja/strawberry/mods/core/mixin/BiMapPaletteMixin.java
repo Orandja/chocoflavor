@@ -4,6 +4,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.collection.IndexedIterable;
 import net.minecraft.world.chunk.BiMapPalette;
+import net.orandja.strawberry.mods.core.CustomItemsAndBlocks;
 import net.orandja.strawberry.mods.core.intf.StrawberryBlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,12 +16,7 @@ public abstract class BiMapPaletteMixin<T> {
     @Redirect(method = "writePacket", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/collection/IndexedIterable;getRawId(Ljava/lang/Object;)I"))
     public int writeCustomPacket(IndexedIterable instance, T t) {
         if(t instanceof BlockState state) {
-            if(state.getBlock() instanceof StrawberryBlockState blockStateTransformer) {
-                return instance.getRawId(blockStateTransformer.transform(state));
-            }
-            if(state.getBlock().equals(Blocks.NOTE_BLOCK)) {
-                return instance.getRawId(Blocks.NOTE_BLOCK.getDefaultState());
-            }
+            return CustomItemsAndBlocks.interceptBlockState(state, instance::getRawId, instance.getRawId(t));
         }
         return instance.getRawId(t);
     }
@@ -29,12 +25,7 @@ public abstract class BiMapPaletteMixin<T> {
     @Redirect(method = "getPacketSize", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/collection/IndexedIterable;getRawId(Ljava/lang/Object;)I"))
     public int getCustomPacketSize(IndexedIterable instance, T t) {
         if(t instanceof BlockState state) {
-            if(state.getBlock() instanceof StrawberryBlockState blockStateTransformer) {
-                return instance.getRawId(blockStateTransformer.transform(state));
-            }
-            if(state.getBlock().equals(Blocks.NOTE_BLOCK)) {
-                return instance.getRawId(Blocks.NOTE_BLOCK.getDefaultState());
-            }
+            return CustomItemsAndBlocks.interceptBlockState(state, instance::getRawId, instance.getRawId(t));
         }
         return instance.getRawId(t);
     }

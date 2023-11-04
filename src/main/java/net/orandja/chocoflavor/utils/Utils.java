@@ -1,15 +1,20 @@
 package net.orandja.chocoflavor.utils;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
+import joptsimple.internal.Strings;
+import net.orandja.chocoflavor.ChocoFlavor;
+
+import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public abstract class Utils {
 
     public interface ObjectCreator<T> {
         T create();
+    }
+
+    public interface ObjectRunner<T, R> {
+        R create(T value);
     }
 
     public static <T> T create(ObjectCreator<T> creator, Consumer<T> consumer) {
@@ -25,8 +30,33 @@ public abstract class Utils {
         return object;
     }
 
+    public static <T, R> R run(T object, ObjectRunner<T, R> runner) {
+        return runner.create(object);
+    }
+
+    public static <T> T log(T object) {
+        return apply(object, ChocoFlavor.LOGGER::info);
+    }
+
+    public static void log(Object... objects) {
+        ChocoFlavor.LOGGER.info(Arrays.stream(objects).map(o -> o.toString()).collect(Collectors.joining(", ")));
+    }
+
     public interface Scheduled {
         void run();
+    }
+
+    public static boolean anyEquals(Object src, Object... others) {
+        for (Object other : others) {
+            if(src.equals(other)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static String capitalize(String input) {
+        return input.substring(0, 1).toUpperCase() + input.substring(1);
     }
 
     private static final Map<Scheduled, Timer> schedules = new HashMap<>();

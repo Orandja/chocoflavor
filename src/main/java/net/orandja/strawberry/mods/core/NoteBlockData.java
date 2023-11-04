@@ -72,4 +72,8 @@ public record NoteBlockData(int note, Instrument instrument, boolean powered) {
                 (powered ? 1 : 0);
     }
 
+    public String toBlockStateString() {
+        return "instrument="+ instrument.asString() +",note="+ note +",powered=" + powered;
+    }
+
 }

@@ -7,29 +7,21 @@ import com.google.gson.internal.Streams;
 import com.google.gson.stream.JsonWriter;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.orandja.chocoflavor.ChocoFlavor;
 import net.orandja.chocoflavor.utils.Utils;
 import net.orandja.strawberry.mods.core.NoteBlockData;
+import net.orandja.strawberry.mods.core.block.StrawberryBlock;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.zip.ZipFile;
 
 public abstract class StrawberryResourcePackGenerator {
 
-    public @interface ModelData {
-        String baseItem();
-        int id();
-        String modelName();
-        String texture();
-    }
-
-    public record CustomModelData(int id, String model, String texture) {
+    public record CustomModelData(int id, String model, String[] textures) {
 
     }
 
@@ -59,55 +51,104 @@ public abstract class StrawberryResourcePackGenerator {
     }
 
     public static void _save() {
-        JsonObject mainNode = new JsonObject();
-        JsonObject variants = new JsonObject();
+        writeTo("../resourcepack/assets/minecraft/blockstates/note_block.json", Utils.create(JsonObject::new, mainNode -> {
+            mainNode.add("variants", Utils.create(JsonObject::new, variants -> {
 
-        noteblockModels.forEach((data, modelPath) -> {
-            JsonObject variant = new JsonObject();
-            variant.addProperty("model", modelPath);
-            variants.add("instrument="+ data.instrument().asString() +",note="+ data.note() +",powered=" + data.powered(), variant);
-        });
+                Utils.apply(getSourceModel("item/note_block"), sourceModel -> {
+                    sourceModel.add("overrides", Utils.create(JsonArray::new, overrides -> {
+                        noteblockModels.keySet().stream().sorted(Comparator.comparing(NoteBlockData::toID)).forEach(data -> {
+                            String modelPath = noteblockModels.get(data);
+                            variants.add(data.toBlockStateString(), Utils.create(JsonObject::new, model -> {
+                                model.addProperty("model", modelPath);
+                            }));
 
-        mainNode.add("variants", variants);
+                            overrides.add(Utils.create(JsonObject::new, override -> {
+                                override.add("predicate", Utils.create(JsonObject::new, predicate -> {
+                                    predicate.addProperty("custom_model_data", data.toID());
+                                }));
 
-        writeTo("../resourcepack/assets/minecraft/blockstates/note_block.json", mainNode);
+                                override.addProperty("model", modelPath.replace("minecraft:block/", "minecraft:item/"));
+                            }));
 
-//        itemCustomModelData.forEach((path, customModels) -> {
+                            writeTo("../resourcepack/assets/minecraft/models/item/" + modelPath.replace("minecraft:block/", "") + ".json", Utils.create(JsonObject::new, customBlockItemModel -> {
+                                customBlockItemModel.addProperty("parent", modelPath);
+                            }));
+                        });
+                    }));
+
+                    writeTo("../resourcepack/assets/minecraft/models/item/note_block.json", sourceModel);
+                });
+            }));
+        }));
+
         itemModelData.forEach((path, customModels) -> {
-            JsonObject modelObject = getSourceModel("item/" + path);
-            JsonArray overrides = new JsonArray();
-            modelObject.add("overrides", overrides);
 
-            for (CustomModelData modelData : customModels) {
-                JsonObject override = new JsonObject();
-                JsonObject predicate = new JsonObject();
-                predicate.addProperty("custom_model_data", "item/" + modelData.id);
+            writeTo("../resourcepack/assets/minecraft/models/item/" + path + ".json", Utils.apply(getSourceModel("item/" + path), sourceModel -> {
+                sourceModel.add("overrides", Utils.create(JsonArray::new, overrides -> {
+                    customModels.stream().sorted(Comparator.comparing(CustomModelData::id)).forEach(modelData -> {
+                        overrides.add(Utils.create(JsonObject::new, override -> {
+                            override.add("predicate", Utils.create(JsonObject::new, predicate -> {
+                                predicate.addProperty("custom_model_data", modelData.id);
+                            }));
+                            override.addProperty("model", "minecraft:"+ "item/" + modelData.model);
+                        }));
 
-                override.add("predicate", predicate);
-                override.addProperty("model", "minecraft:"+ "item/" + modelData.model);
-                overrides.add(override);
+//                        JsonObject customItemModel = new JsonObject();
 
-                JsonObject customItemModel = new JsonObject();
-                customItemModel.addProperty("parent", "minecraft:item/generated");
-                JsonObject textures = new JsonObject();
-                textures.addProperty("layer0", "item/" + modelData.texture);
-                customItemModel.add("textures", textures);
+                        writeTo("../resourcepack/assets/minecraft/models/item/" + modelData.model + ".json", Utils.create(JsonObject::new, customModel -> {
+                            customModel.addProperty("parent", sourceModel.get("parent").getAsString());
+                            customModel.add("textures", Utils.create(JsonObject::new, textures -> {
+                                for (int i = 0; i < modelData.textures.length; i++) {
+                                    textures.addProperty("layer"+ i, "minecraft:item/" + modelData.textures[i]);
+                                }
+                            }));
+                        }));
+                    });
+                }));
+            }));
+//            JsonObject modelObject = getSourceModel("item/" + path);
 
-                writeTo("../resourcepack/assets/minecraft/models/item/" + modelData.model + ".json", customItemModel);
-            }
-
-            writeTo("../resourcepack/assets/minecraft/models/item/" + path + ".json", modelObject);
+//            writeTo("../resourcepack/assets/minecraft/models/item/" + path + ".json", modelObject);
         });
+
+//        itemModelData.forEach((path, customModels) -> {
+//            JsonObject modelObject = getSourceModel("item/" + path);
+//            JsonArray overrides = new JsonArray();
+//            modelObject.add("overrides", overrides);
+//
+//            for (CustomModelData modelData : customModels) {
+//                JsonObject override = new JsonObject();
+//                JsonObject predicate = new JsonObject();
+//                predicate.addProperty("custom_model_data", modelData.id);
+//
+//                override.add("predicate", predicate);
+//                override.addProperty("model", "minecraft:"+ "item/" + modelData.model);
+//                overrides.add(override);
+//
+//                JsonObject customItemModel = new JsonObject();
+//                customItemModel.addProperty("parent", modelObject.get("parent").getAsString());
+//                JsonObject textures = new JsonObject();
+//                for (int i = 0; i < modelData.textures.length; i++) {
+//                    textures.addProperty("layer"+ i, "minecraft:item/" + modelData.textures[i]);
+//                }
+//                customItemModel.add("textures", textures);
+//
+//                writeTo("../resourcepack/assets/minecraft/models/item/" + modelData.model + ".json", customItemModel);
+//            }
+//
+//            writeTo("../resourcepack/assets/minecraft/models/item/" + path + ".json", modelObject);
+//        });
     }
 
     public static JsonObject getSourceModel(String path) {
         try {
-            ZipFile zipFile = new ZipFile("/home/olivier/dev/choco-flavor/.gradle/loom-cache/minecraftMaven/net/minecraft/minecraft-clientOnly-9615416516/1.20.2-net.fabricmc.yarn.1_20_2.1.20.2+build.1-v2/minecraft-clientOnly-9615416516-1.20.2-net.fabricmc.yarn.1_20_2.1.20.2+build.1-v2.jar");
+            ZipFile zipFile = new ZipFile("/home/oliviermartinez/coding/choco-flavor/.gradle/loom-cache/minecraftMaven/net/minecraft/minecraft-clientOnly-9615416516/1.20.2-net.fabricmc.yarn.1_20_2.1.20.2+build.1-v2/minecraft-clientOnly-9615416516-1.20.2-net.fabricmc.yarn.1_20_2.1.20.2+build.1-v2.jar");
             return JsonParser.parseString(new BufferedReader(
                     new InputStreamReader(zipFile.getInputStream(zipFile.getEntry("assets/minecraft/models/"+ path +".json")), StandardCharsets.UTF_8))
                     .lines()
                     .collect(Collectors.joining("\n"))).getAsJsonObject();
         } catch (Exception e) {
+            ChocoFlavor.LOGGER.info(path);
             e.printStackTrace();
         }
 

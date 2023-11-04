@@ -57,9 +57,10 @@ public abstract class BarrelBlockEntityMixin extends LootableContainerBlockEntit
         this.createBarrelScreenHandler(this, syncId, playerInventory, info);
     }
 
-//    public void applyEnchantments() {
-//        this.setInventory(DeepStorageDefaultedList.ofSize(27 + this.getEnchantmentDictionary().computeValue(it -> it * 27, VALID_ENCHANTMENTS), 27, ItemStack.EMPTY));
-//    }
+    @Override
+    public void setStack(int slot, ItemStack stack) {
+        setStack(slot, stack, super::setStack);
+    }
 
     @Override
     public void markDirty() {

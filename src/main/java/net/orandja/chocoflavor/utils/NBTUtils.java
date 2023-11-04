@@ -84,6 +84,16 @@ public abstract class NBTUtils {
         }
     }
 
+    public static <N extends NbtElement> N getOrCreate(NbtCompound tag, String id, NbtCompute<N> compute) {
+        if(tag.contains(id)) {
+            return (N) tag.get(id);
+        } else {
+            N value = compute.get();
+            tag.put(id, value);
+            return value;
+        }
+    }
+
     public static NbtCompound getTagOrCompute(NbtCompound tag, String id, Consumer<NbtCompound> consumer) {
         return getOrCompute(tag, id, tag::getCompound, NbtCompound::new, consumer);
     }
@@ -94,5 +104,22 @@ public abstract class NBTUtils {
 
     public static NbtList getStringListOrCompute(NbtCompound tag, String id, NbtCompute<NbtList> compute, Consumer<NbtList> consumer) {
         return getOrCompute(tag, id, key -> tag.getList(key, NbtElement.STRING_TYPE), compute, consumer);
+    }
+
+    public static void computeLore(NbtCompound tag, Consumer<NbtList> consumer) {
+        NbtCompound display = NBTUtils.getOrCreate(tag, "display", tag::getCompound, NbtCompound::new);
+        NbtList lore = NBTUtils.getOrCreate(display, "Lore", key -> display.getList(key, NbtElement.STRING_TYPE), () -> {
+            NbtList list = new NbtList();
+            return list;
+        });
+        consumer.accept(lore);
+    }
+
+    public static void addToLore(NbtCompound tag, String... lines) {
+        computeLore(tag, lore -> {
+            for (String line : lines) {
+                lore.add(NbtString.of(line));
+            }
+        });
     }
 }

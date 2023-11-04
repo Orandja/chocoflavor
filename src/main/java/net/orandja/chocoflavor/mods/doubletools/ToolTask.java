@@ -7,6 +7,7 @@ import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.orandja.chocoflavor.ChocoFlavor;
 import net.orandja.chocoflavor.utils.BlockUtils;
 import net.orandja.chocoflavor.utils.BlockZone;
 import net.orandja.chocoflavor.utils.StackUtils;
@@ -23,12 +24,12 @@ public class ToolTask {
     }
 
     public static ToolTask[] tasksFor(ItemStack stack) {
-        Optional<Map.Entry<Class<?>, ToolTask[]>> first = validModes.entrySet().stream().filter(it -> stack.getItem().getClass().isAssignableFrom(it.getKey())).findFirst();
+        Optional<Map.Entry<Class<?>, ToolTask[]>> first = validModes.entrySet().stream().filter(it -> it.getKey().isAssignableFrom(stack.getItem().getClass())).findFirst();
         return first.isPresent() ? first.get().getValue() : new ToolTask[] {TASK_ALL};
     }
 
     public static boolean hasTasksFor(ItemStack stack) {
-        return validModes.entrySet().stream().anyMatch(it -> stack.getItem().getClass().isAssignableFrom(it.getKey()));
+        return validModes.entrySet().stream().anyMatch(it -> it.getKey().isAssignableFrom(stack.getItem().getClass()));
     }
     public interface ToolTaskExecutor {
         void execute(World world, BlockPos pos, PlayerEntity player, BlockState state, Pair<ItemStack, ItemStack> stacksInHands, Consumer<BlockPos> consumer);
@@ -66,7 +67,7 @@ public class ToolTask {
 
     static ToolTask TASK_VEIN = new ToolTask("Vein Miner", (world, pos, player, state, stacksInHands, consumer) -> {
         if(BlockUtils.isOre(state)) {
-            PICKAXE_ADJASCENTS_ZONE.get(world, pos, 32, it -> new Pair<>(BlockUtils.isOre(world.getBlockState(it)), it), BlockUtils::isOre).forEach(it -> {
+            PICKAXE_ADJASCENTS_ZONE.get(world, pos, 32, it -> new Pair<>(BlockUtils.isOreAndTheSame(world.getBlockState(it), state), it), BlockUtils::isOre).forEach(it -> {
                 if(!StackUtils.anyGonnaBreak(stacksInHands)) {
                     consumer.accept(it);
                 }

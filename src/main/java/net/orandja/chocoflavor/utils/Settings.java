@@ -45,7 +45,6 @@ public class Settings {
         public void setValueSilently(T value) {
             this.value = value;
         }
-
     }
     @SuppressWarnings("unchecked")
     private static abstract class Abstract<S extends Abstract<?, ?>, T> extends ObservableValue<T> {
