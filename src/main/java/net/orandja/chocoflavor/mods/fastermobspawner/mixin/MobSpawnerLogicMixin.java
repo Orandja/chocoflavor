@@ -29,6 +29,6 @@ public abstract class MobSpawnerLogicMixin implements FasterMobSpawner {
 
     @Redirect(method = "serverTick", at = @At(value = "FIELD", opcode = Opcodes.PUTFIELD, ordinal = 0, target = "Lnet/minecraft/world/MobSpawnerLogic;spawnDelay:I"))
     private void serverTick(MobSpawnerLogic logic, int ignored, ServerWorld world, BlockPos pos) {
-        tickBetterSpawner(logic, world, pos);
+        tickBetterSpawner(world, pos);
     }
 }

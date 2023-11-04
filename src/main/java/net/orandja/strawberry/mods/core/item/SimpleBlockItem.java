@@ -26,7 +26,7 @@ public class SimpleBlockItem extends BlockItem implements StrawberryItem {
         return Utils.apply(transform(sourceStack, Items.NOTE_BLOCK, this.customDataModel), it -> {
             it.getOrCreateNbt().put("BlockStateTag", Utils.apply(new NbtCompound(), tag -> {
                 tag.putString("instrument", noteblockData.instrument().asString());
-                tag.putBoolean("powered", noteblockData.powered());
+                tag.putString("powered", noteblockData.powered() ? "true": "false");
                 tag.putInt("note", noteblockData.note());
             }));
         });

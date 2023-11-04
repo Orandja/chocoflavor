@@ -5,6 +5,7 @@
   "mixins": [
     "BarrelBlockEntityMixin",
     "BarrelBlockMixin",
+    "HopperBlockEntityMixin",
     "ChocoFlavorInit"
   ],
   "client": [

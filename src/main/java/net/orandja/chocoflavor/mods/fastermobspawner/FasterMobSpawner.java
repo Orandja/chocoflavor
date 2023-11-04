@@ -28,7 +28,7 @@ public interface FasterMobSpawner {
 
     Box BOX = new Box(0.0, 0.0, 0.0, 1.0, 1.0, 1.0);
 
-    default void tickBetterSpawner(MobSpawnerLogic logic, ServerWorld world, BlockPos pos) {
+    default void tickBetterSpawner(ServerWorld world, BlockPos pos) {
         double requiredDistance = (getRequiredPlayerRange() * getRequiredPlayerRange());
         if(getSpawnDelay() <= getNextLoad()) {
             // 100⌊x/100⌋ to eliminate double digits ticks... I don't remember why; should have commented earlier. LUL

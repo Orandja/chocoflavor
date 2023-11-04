@@ -3,6 +3,7 @@ package net.orandja.chocoflavor;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.MinecraftServer;
+import net.orandja.chocoflavor.mods.core.CauldronBucketInteraction;
 import net.orandja.chocoflavor.utils.Settings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,6 +26,6 @@ public class ChocoFlavor implements ModInitializer {
     }
 
     public void beforeLaunch() {
-
+        CauldronBucketInteraction.beforeLaunch();
     }
 }

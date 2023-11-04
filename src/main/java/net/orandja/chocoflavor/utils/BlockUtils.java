@@ -2,8 +2,6 @@ package net.orandja.chocoflavor.utils;
 
 import net.minecraft.block.*;
 import net.minecraft.registry.tag.BlockTags;
-import net.orandja.chocoflavor.ChocoFlavor;
-import net.orandja.chocoflavor.mods.doubletools.mixin.ChocoFlavorInit;
 
 import java.util.Objects;
 
@@ -30,6 +28,23 @@ public abstract class BlockUtils {
     }
 
     public static boolean isWood(BlockState state) {
+        return state.isIn(BlockTags.LOGS) || Utils.anyEquals(state.getBlock(), (Object[]) ADDITIONNAL_LOG_BLOCKS);
+    }
+
+    public static boolean isLeaves(BlockState state) {
+        return (state.isIn(BlockTags.LEAVES) && !state.get(LeavesBlock.PERSISTENT)) || state.isOf(Blocks.VINE);
+    }
+
+    public static boolean areSameLeaves(BlockState state, Block leaves) {
+        return state.isOf(leaves);
+    }
+
+    private final static Block[] ADDITIONNAL_LOG_BLOCKS = new Block[] { Blocks.CRIMSON_HYPHAE, Blocks.WARPED_HYPHAE, Blocks.MANGROVE_ROOTS, Blocks.MANGROVE_LOG };
+    private final static Block[] MANGROVE_LOG_BLOCKS = new Block[] { Blocks.MANGROVE_ROOTS, Blocks.MANGROVE_LOG };
+    public static boolean areSameWoods(BlockState state, Block baseWood) {
+        if(Utils.anyEquals(baseWood, (Object[]) MANGROVE_LOG_BLOCKS)) {
+            return Utils.anyEquals(state.getBlock(), (Object[]) MANGROVE_LOG_BLOCKS);
+        }
         return state.isIn(BlockTags.LOGS) || state.getBlock() == Blocks.CRIMSON_HYPHAE || state.getBlock() == Blocks.WARPED_HYPHAE;
     }
 

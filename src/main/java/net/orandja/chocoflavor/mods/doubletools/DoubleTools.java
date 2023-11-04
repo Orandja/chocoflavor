@@ -24,6 +24,7 @@ import net.orandja.chocoflavor.mods.core.InventoryInteract;
 import net.orandja.chocoflavor.utils.BlockUtils;
 import net.orandja.chocoflavor.utils.MathUtils;
 import net.orandja.chocoflavor.utils.PlayerUtils;
+import net.orandja.chocoflavor.utils.Utils;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -68,6 +69,19 @@ public interface DoubleTools {
         }
 
         return value;
+    }
+
+    default void useShears(boolean value, ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity entity, Class<?> clazz) {
+        if(!world.isClient && BlockUtils.isLeaves(state) && entity instanceof PlayerEntity player && player instanceof ToolUser toolUser && PlayerUtils.areBothTools(player, clazz)) {
+            toolUser.getToolTask(player.getMainHandStack()).getExecutor().execute(world, pos, player, state, PlayerUtils.getBothTools(player), it -> {
+                player.getMainHandStack().damage(1, player, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
+                player.getOffHandStack().damage(1, player, e -> e.sendEquipmentBreakStatus(EquipmentSlot.OFFHAND));
+
+                player.incrementStat(Stats.MINED.getOrCreateStat(state.getBlock()));
+                player.addExhaustion(0.005f);
+                PlayerUtils.tryBreakBlock(player, it);
+            });
+        }
     }
 
     default void useAxe(Block block, BlockEntity blockEntity, World world, PlayerEntity player, BlockPos pos, BlockState state, ItemStack stack, AfterBreakBlock superAfterBreakBlock) {

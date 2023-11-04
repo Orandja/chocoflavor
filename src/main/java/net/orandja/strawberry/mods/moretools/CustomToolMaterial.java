@@ -1,11 +1,19 @@
 package net.orandja.strawberry.mods.moretools;
 
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
+import net.orandja.chocoflavor.utils.NBTUtils;
+import net.orandja.chocoflavor.utils.StackUtils;
+import net.orandja.chocoflavor.utils.TextUtils;
 
 import java.util.function.BiPredicate;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class CustomToolMaterial implements ToolMaterial {
@@ -64,5 +72,11 @@ public class CustomToolMaterial implements ToolMaterial {
 
     public boolean checkForEnchantment(Enchantment enchantment, ItemStack itemStack) {
         return this.enchantingCheck.test(enchantment, itemStack);
+    }
+
+    public void modifyStack(ItemStack stack, ToolItem replacementItem) {
+        stack.setDamage(StackUtils.convertDurability(stack, replacementItem));
+        stack.addHideFlag(ItemStack.TooltipSection.MODIFIERS);
+        TextUtils.addDurability(stack.getOrCreateNbt(), stack.getDamage(), stack.getMaxDamage());
     }
 }

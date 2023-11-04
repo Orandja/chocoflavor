@@ -1,5 +1,6 @@
 package net.orandja.chocoflavor.mods.doubletools;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
@@ -7,7 +8,6 @@ import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.orandja.chocoflavor.ChocoFlavor;
 import net.orandja.chocoflavor.utils.BlockUtils;
 import net.orandja.chocoflavor.utils.BlockZone;
 import net.orandja.chocoflavor.utils.StackUtils;
@@ -35,6 +35,7 @@ public class ToolTask {
         void execute(World world, BlockPos pos, PlayerEntity player, BlockState state, Pair<ItemStack, ItemStack> stacksInHands, Consumer<BlockPos> consumer);
     }
     static BlockZone AXE_ADJASCENTS_ZONE = new BlockZone(-1, 1, 0, 1, -1, 1);
+    static BlockZone SHEARS_ADJASCENTS_ZONE = new BlockZone(-1, 1, -1, 1, -1, 1);
     static BlockZone PICKAXE_ADJASCENTS_ZONE = new BlockZone(-1, 1, -1, 1, -1, 1);
     static Map<Direction, BlockZone> DIRECTION_ADJASCENTS_ZONE = Map.of(
             Direction.EAST, new BlockZone(0, 0, -1, 1, -1, 1),
@@ -77,9 +78,23 @@ public class ToolTask {
 
     static ToolTask TASK_AXE = new ToolTask("Axe", (world, pos, player, state, stacksInHands, consumer) -> {
         if(BlockUtils.isWood(state)) {
+            Block baseWood = state.getBlock();
             AXE_ADJASCENTS_ZONE.get(world, pos, 128,
-                    it -> new Pair<>(BlockUtils.isWood(world.getBlockState(it)) && state.getBlock().equals(world.getBlockState(it).getBlock()), it),
-                    it -> BlockUtils.isWood(it) && state.getBlock().equals(it.getBlock())).forEach(it -> {
+                    it -> new Pair<>(BlockUtils.areSameWoods(world.getBlockState(it), baseWood), it),
+                    it -> BlockUtils.areSameWoods(it, baseWood)).forEach(it -> {
+                if(!StackUtils.anyGonnaBreak(stacksInHands)) {
+                    consumer.accept(it);
+                }
+            });
+        }
+    });
+
+    static ToolTask TASK_SHEARS = new ToolTask("Shears", (world, pos, player, state, stacksInHands, consumer) -> {
+        if(BlockUtils.isLeaves(state)) {
+            Block leaves = state.getBlock();
+            SHEARS_ADJASCENTS_ZONE.get(world, pos, 128,
+                    it -> new Pair<>(BlockUtils.areSameLeaves(world.getBlockState(it), leaves) || BlockUtils.isWood(world.getBlockState(it)), it),
+                    it -> BlockUtils.areSameLeaves(it, leaves)).forEach(it -> {
                 if(!StackUtils.anyGonnaBreak(stacksInHands)) {
                     consumer.accept(it);
                 }
@@ -95,7 +110,8 @@ public class ToolTask {
             PickaxeItem.class, new ToolTask[] { TASK_ALL, TASK_SIMILAR, TASK_VEIN },
             ShovelItem.class, new ToolTask[] { TASK_ALL, TASK_SIMILAR },
             AxeItem.class, new ToolTask[] { TASK_AXE },
-            HoeItem.class, new ToolTask[] { TASK_ALL }
+            HoeItem.class, new ToolTask[] { TASK_ALL },
+            ShearsItem.class, new ToolTask[] { TASK_SHEARS }
     );
 
     private final ToolTaskExecutor executor;

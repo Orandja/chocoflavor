@@ -33,11 +33,28 @@ public class BlockZone {
         this.zMax = Math.max(zMin, zMax);
     }
 
-    public interface TripleConsumer<A, B, C> {
-        void accept(A a, B b, C c);
+    public BlockZone(BlockPos pos, int radius) {
+        this.xMin = pos.getX() - radius;
+        this.xMax = pos.getX() + radius;
+
+        this.yMin = pos.getY() - radius;
+        this.yMax = pos.getY() + radius;
+
+        this.zMin = pos.getZ() - radius;
+        this.zMax = pos.getZ() + radius;
     }
 
-    public void iterate(TripleConsumer<Integer, Integer, Integer> consumer) {
+    public boolean contains(BlockPos pos) {
+        return contains(pos.getX(), pos.getY(), pos.getZ());
+    }
+
+    public boolean contains(double x, double y, double z) {
+        return x <= this.xMax && x >= this.xMin &&
+                y <= this.yMax && y >= this.yMin &&
+                z <= this.zMax && z >= this.zMin;
+    }
+
+    public void iterate(TriConsumer<Integer, Integer, Integer> consumer) {
         for (int y = this.yMin; y <= this.yMax; y++) {
             for (int x = this.xMin; x <= this.xMax; x++) {
                 for (int z = this.zMin; z <= this.zMax; z++) {

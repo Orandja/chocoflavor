@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "net.orandja.chocoflavor.mods.tools.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "ChocoFlavorInit",
+    "SheepEntityMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

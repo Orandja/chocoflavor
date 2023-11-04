@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "net.orandja.strawberry.mods.extra.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "BlockWithEnchantmentMixin",
+    "BlockCenteredWithEnchantmentMixin",
+    "DeepStorageBarrelMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

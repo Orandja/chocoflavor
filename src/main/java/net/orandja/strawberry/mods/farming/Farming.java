@@ -60,16 +60,16 @@ public class Farming {
     public static void beforeLaunch() {
 
         //Crops
-        RICE_CROP = Blocks.register("rice_crop", new SimpleCrop(1, () -> RICE_SEEDS));
-        CABBAGE_CROP = Blocks.register("cabbage_crop", new SimpleCrop(5, () -> CABBAGE_SEEDS));
-        ONION_CROP = Blocks.register("onion_crop", new SimpleCrop(9, () -> ONION_SEEDS));
-        TOMATO_CROP = Blocks.register("tomato_crop", new SimpleCrop(13, () -> TOMATO_SEEDS));
+        RICE_CROP = Blocks.register("rice_crop", new SimpleCrop(2, () -> RICE_SEEDS));
+        CABBAGE_CROP = Blocks.register("cabbage_crop", new SimpleCrop(6, () -> CABBAGE_SEEDS));
+        ONION_CROP = Blocks.register("onion_crop", new SimpleCrop(10, () -> ONION_SEEDS));
+        TOMATO_CROP = Blocks.register("tomato_crop", new SimpleCrop(14, () -> TOMATO_SEEDS));
 
         //Seeds
-        RICE_SEEDS = Items.register("rice_seeds", new SimpleSeedItem(RICE_CROP, "Rice seeds", Items.WHEAT_SEEDS, 1, new Item.Settings()));
-        CABBAGE_SEEDS = Items.register("cabbage_seeds", new SimpleSeedItem(CABBAGE_CROP, "Cabbage seeds", Items.WHEAT_SEEDS, 2, new Item.Settings()));
-        ONION_SEEDS = Items.register("onion_seeds", new SimpleSeedItem(ONION_CROP, "Onion seeds", Items.WHEAT_SEEDS, 3, new Item.Settings()));
-        TOMATO_SEEDS = Items.register("tomato_seeds", new SimpleSeedItem(TOMATO_CROP, "Tomato seeds", Items.WHEAT_SEEDS, 4, new Item.Settings()));
+        RICE_SEEDS = Items.register("rice_seeds", new SimpleSeedItem(RICE_CROP, 1, new Item.Settings()));
+        CABBAGE_SEEDS = Items.register("cabbage_seeds", new SimpleSeedItem(CABBAGE_CROP, 5, new Item.Settings()));
+        ONION_SEEDS = Items.register("onion_seeds", new SimpleSeedItem(ONION_CROP, 9, new Item.Settings()));
+        TOMATO_SEEDS = Items.register("tomato_seeds", new SimpleSeedItem(TOMATO_CROP, 13, new Item.Settings()));
 
         //Ingredients
         RICE = Items.register("rice", new SimpleCustomItem("Rice", Items.WHEAT, 1, new Item.Settings()));

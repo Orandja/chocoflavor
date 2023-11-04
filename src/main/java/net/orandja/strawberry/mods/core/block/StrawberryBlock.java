@@ -4,20 +4,14 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.MarkerEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.orandja.chocoflavor.utils.MathUtils;
-import net.orandja.chocoflavor.utils.PlayerUtils;
 import net.orandja.chocoflavor.utils.Utils;
 import net.orandja.strawberry.mods.core.NoteBlockData;
 import net.orandja.strawberry.mods.core.intf.StrawberryBlockState;
@@ -59,20 +53,6 @@ public class StrawberryBlock extends Block implements StrawberryBlockState {
                 player.getWorld().setBlockBreakingInfo(markerEntity.getEntityID(), markerEntity.getMiningPos(), -1);
                 markerEntity.setMiningPos(null);
             }
-
-//            float miningSpeedMultiplier = MathUtils.ConditionalValue.of(player.getMainHandStack().getMiningSpeedMultiplier(this.getDefaultState()))
-//                    .applyModifier(it -> it > 1.0F,
-//                            MathUtils.ConditionalValue.Modifier.ADD,
-//                            () -> Utils.run(EnchantmentHelper.getEfficiency(player), efficiency -> (efficiency > 0 && !player.getMainHandStack().isEmpty()) ? (efficiency * efficiency + 1.0F) : 0.0F))
-//                    .applyModifier(it -> StatusEffectUtil.hasHaste(player),
-//                            MathUtils.ConditionalValue.Modifier.MULTIPLY,
-//                            () -> 1.0F + (StatusEffectUtil.getHasteAmplifier(player) + 1) * 0.2F)
-//                    .applyModifier(it -> player.isSubmergedIn(FluidTags.WATER) && !EnchantmentHelper.hasAquaAffinity(player),
-//                            MathUtils.ConditionalValue.Modifier.DIVIDE,
-//                            () -> 5F)
-//                    .applyModifier(it -> !player.isOnGround(),
-//                            MathUtils.ConditionalValue.Modifier.DIVIDE,
-//                            () -> 5F).getValue() / (this.getHardness() * (player.canHarvest(state) ? 30f : 100f));
 
             float miningSpeedMultiplier = player.getMainHandStack().getMiningSpeedMultiplier(this.getDefaultState());
 

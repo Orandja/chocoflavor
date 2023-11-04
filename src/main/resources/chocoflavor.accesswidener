@@ -4,3 +4,4 @@ accessible method net/minecraft/world/chunk/PalettedContainer$DataProvider <init
 accessible method net/minecraft/world/chunk/PalettedContainer$PaletteProvider <init> (I)V
 accessible class net/minecraft/world/chunk/PalettedContainer$PaletteProvider
 accessible class net/minecraft/world/chunk/PaletteResizeListener
+accessible class net/minecraft/world/block/ChainRestrictedNeighborUpdater$Entry

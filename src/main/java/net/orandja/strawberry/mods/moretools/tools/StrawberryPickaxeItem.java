@@ -1,29 +1,20 @@
 package net.orandja.strawberry.mods.moretools.tools;
 
 import com.google.common.collect.ImmutableList;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.*;
-import net.minecraft.nbt.NbtString;
 import net.minecraft.registry.Registries;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableTextContent;
-import net.minecraft.util.Formatting;
-import net.orandja.chocoflavor.utils.NBTUtils;
-import net.orandja.chocoflavor.utils.StackUtils;
-import net.orandja.chocoflavor.utils.TextUtils;
 import net.orandja.chocoflavor.utils.Utils;
 import net.orandja.strawberry.mods.core.intf.StrawberryItem;
 import net.orandja.strawberry.mods.moretools.CustomToolMaterial;
-
-import java.util.function.Consumer;
 
 public class StrawberryPickaxeItem extends PickaxeItem implements StrawberryItem {
 
     private final int customDataModel;
     private final PickaxeItem replacementItem;
-//    private Consumer<ItemStack> customTransformer;
 
     public StrawberryPickaxeItem(CustomToolMaterial material, Item replacementItem, int customDataModel) {
         this(material, ((PickaxeItem)replacementItem), customDataModel, new Item.Settings());
@@ -42,16 +33,11 @@ public class StrawberryPickaxeItem extends PickaxeItem implements StrawberryItem
     @Override
     public ItemStack transform(ItemStack sourceStack) {
         return Utils.apply(transform(sourceStack, this.replacementItem, this.customDataModel), it -> {
-            it.setDamage(StackUtils.convertDurability(sourceStack, this.replacementItem));
-            it.addHideFlag(ItemStack.TooltipSection.MODIFIERS);
-            TextUtils.addDurability(it.getOrCreateNbt(), sourceStack.getDamage(), sourceStack.getMaxDamage());
+            if(this.getMaterial() instanceof CustomToolMaterial material) {
+                material.modifyStack(it, this.replacementItem);
+            }
         });
     }
-
-//    public StrawberryPickaxeItem addCustomTransformer(Consumer<ItemStack> customTransformer) {
-//        this.customTransformer = customTransformer;
-//        return this;
-//    }
 
     @Override
     public void register() {
@@ -65,5 +51,10 @@ public class StrawberryPickaxeItem extends PickaxeItem implements StrawberryItem
 
     public static float getAttackSpeed(MiningToolItem pickaxeItem) {
         return (float) ((ImmutableList<EntityAttributeModifier>)pickaxeItem.getAttributeModifiers(EquipmentSlot.MAINHAND).get(EntityAttributes.GENERIC_ATTACK_SPEED)).get(0).getValue();
+    }
+
+    @Override
+    public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
+        return super.getMiningSpeedMultiplier(stack, state);
     }
 }

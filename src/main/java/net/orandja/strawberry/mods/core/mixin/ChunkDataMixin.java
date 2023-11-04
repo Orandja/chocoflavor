@@ -3,6 +3,7 @@ package net.orandja.strawberry.mods.core.mixin;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.packet.s2c.play.ChunkData;
 import net.orandja.chocoflavor.ChocoFlavor;
+import net.orandja.chocoflavor.mods.core.BlockWithEnchantment;
 import net.orandja.strawberry.mods.core.intf.CustomBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

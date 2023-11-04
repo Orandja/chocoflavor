@@ -18,16 +18,16 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.orandja.chocoflavor.ChocoFlavor;
 import net.orandja.chocoflavor.mods.core.accessor.LootContextParameterSetAccessor;
 import net.orandja.chocoflavor.utils.NBTUtils;
 import net.orandja.chocoflavor.utils.Settings;
 import com.google.common.collect.Lists;
+import net.orandja.chocoflavor.utils.TriConsumer;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -125,6 +125,15 @@ public interface BlockWithEnchantment {
     }
 
     class EnchantmentDictionary {
+
+        public void getApplied(BiConsumer<Enchantment, Short> consumer) {
+            this.values.forEach(consumer);
+        }
+
+        public void getApplied(TriConsumer<Enchantment, Short, Integer> consumer) {
+            AtomicInteger i = new AtomicInteger();
+            this.values.forEach((enchantment, level) -> consumer.accept(enchantment, level, i.getAndIncrement()));
+        }
 
         public interface DictionaryCompute<T extends Number> {
             T computeValue(int value);

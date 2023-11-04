@@ -1,5 +1,6 @@
 package net.orandja.chocoflavor.mods.deepstoragebarrel;
 
+import net.minecraft.block.entity.BarrelBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -12,9 +13,11 @@ import net.orandja.chocoflavor.utils.MathUtils;
 public class DeepStorageScreenHandler extends ScreenHandler {
 
     private final Inventory inventory;
+    private final PlayerInventory playerInventory;
 
     protected DeepStorageScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
         super(ScreenHandlerType.GENERIC_9X6, syncId);
+        this.playerInventory = playerInventory;
         this.inventory = inventory;
 
         checkSize(inventory, 54);

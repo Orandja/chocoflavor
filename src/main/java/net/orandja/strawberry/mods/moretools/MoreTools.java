@@ -30,12 +30,12 @@ public class MoreTools {
     public static CustomToolMaterial COPPER_TOOL_MATERIAL = new CustomToolMaterial(MiningLevels.STONE, 200, 6.0f, 2.0f, 14, () -> Ingredient.ofItems(Items.COPPER_INGOT));
     public static CustomToolMaterial DEEPSLATE_TOOL_MATERIAL = new CustomToolMaterial(MiningLevels.STONE, 131, 6.0f, 2.0f, 14, () -> Ingredient.ofItems(Items.COBBLED_DEEPSLATE));
     public static CustomToolMaterial EMERALD_TOOL_MATERIAL = new CustomToolMaterial(MiningLevels.IRON, 800, 12.0f, 0.0f, 22, () -> Ingredient.ofItems(Items.EMERALD));
-    public static CustomToolMaterial OBSIDIAN_TOOL_MATERIAL = new CustomToolMaterial(MiningLevels.DIAMOND, 3000, 8.0f, 0.0f, 22, () -> Ingredient.ofItems(Items.OBSIDIAN))
+    public static CustomToolMaterial OBSIDIAN_TOOL_MATERIAL = new CustomToolMaterial(MiningLevels.DIAMOND, 3000, 8.0f, 0.0f, -1, () -> Ingredient.ofItems(Items.OBSIDIAN))
             .setEnchantingCheck((enchantment, stack) -> false);
-    public static CustomToolMaterial CRYING_OBSIDIAN_TOOL_MATERIAL = new CustomToolMaterial(MiningLevels.DIAMOND, 6000, 9.0f, 0.0f, 22, () -> Ingredient.ofItems(Items.CRYING_OBSIDIAN))
+    public static CustomToolMaterial CRYING_OBSIDIAN_TOOL_MATERIAL = new CustomToolMaterial(MiningLevels.DIAMOND, 6000, 9.0f, 0.0f, -1, () -> Ingredient.ofItems(Items.CRYING_OBSIDIAN))
             .setEnchantingCheck((enchantment, stack) -> enchantment.equals(Enchantments.EFFICIENCY) && EnchantmentHelper.getLevel(enchantment, stack) <= 5);
-    public static CustomToolMaterial REINFORCED_OBSIDIAN_TOOL_MATERIAL = new CustomToolMaterial(MiningLevels.NETHERITE, 15000, 9.0f + ( 1 + ( 5 * 5)), 0.0f, 22, () -> Ingredient.ofItems(Items.OBSIDIAN))
-            .setEnchantingCheck((enchantment, stack) -> !enchantment.equals(Enchantments.UNBREAKING));
+    public static CustomToolMaterial REINFORCED_OBSIDIAN_TOOL_MATERIAL = new CustomToolMaterial(MiningLevels.NETHERITE, 15000, 9.0f + ( 1 + ( 5 * 5)), 0.0f, -1, () -> Ingredient.ofItems(Items.OBSIDIAN))
+            .setEnchantingCheck((enchantment, stack) -> !Utils.anyEquals(enchantment, Enchantments.UNBREAKING, Enchantments.EFFICIENCY));
 
     public static CustomArmorMaterial COPPER_ARMOR_MATERIAL = new CustomArmorMaterial("copper", 10, Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
         map.put(ArmorItem.Type.BOOTS, 2);
@@ -166,7 +166,5 @@ public class MoreTools {
             it.mapColor(MapColor.BLACK).instrument(Instrument.BASEDRUM).requiresTool().strength(150.0f, 1200.0f);
         }));
         REINFORCED_OBSIDIAN_ITEM = Items.register(new SimpleBlockItem(REINFORCED_OBSIDIAN, 24, new Item.Settings()));
-
-        EnchantMore.addBasic(Items.STICK, Enchantments.KNOCKBACK);
     }
 }

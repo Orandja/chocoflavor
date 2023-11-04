@@ -5,12 +5,14 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.predicate.entity.EntityPredicates;
-import net.orandja.chocoflavor.ChocoFlavor;
 
 import java.util.EnumSet;
 import java.util.function.Predicate;
 
 public class TemptItemGoal extends Goal {
+
+    private static final int COOLDOWN = 40;
+    private static final double INTERSECT_DISTANCE = 0.75D;
 
     private final AnimalEntity mob;
     private final double speed;
@@ -66,7 +68,7 @@ public class TemptItemGoal extends Goal {
                 .stream().filter(entity -> foodPredicate.test(entity.getStack())).findFirst().ifPresentOrElse(entity -> itemEntity = entity, () -> itemEntity = null);
 
         if (itemEntity == null) {
-            cooldown = 100;
+            cooldown = COOLDOWN;
             return false;
         } else
             return true;
@@ -82,7 +84,7 @@ public class TemptItemGoal extends Goal {
 
     public void stop() {
         mob.getNavigation().stop();
-        cooldown = 100;
+        cooldown = COOLDOWN;
         active = false;
         itemEntity = null;
     }
@@ -95,7 +97,7 @@ public class TemptItemGoal extends Goal {
 
         mob.getLookControl().lookAt(itemEntity, (mob.getMaxHeadRotation() + 20), mob.getMaxLookPitchChange());
 
-        if (mob.squaredDistanceTo(itemEntity) < 1.0 && mob.getBoundingBox().intersects(itemEntity.getBoundingBox())) {
+        if (mob.squaredDistanceTo(itemEntity) < INTERSECT_DISTANCE && mob.getBoundingBox().intersects(itemEntity.getBoundingBox())) {
             if (itemEntity != null) {
                 itemEntity.setStack(stackHandler.affect(itemEntity.getStack()));
                 mob.lovePlayer(null);
@@ -108,7 +110,7 @@ public class TemptItemGoal extends Goal {
     }
 
     public double adjust(double mobAxis, double itemAxis) {
-        return adjust(mobAxis, itemAxis, 1.0D);
+        return adjust(mobAxis, itemAxis, INTERSECT_DISTANCE);
     }
 
     public double adjust(double mobAxis, double itemAxis, double distance) {

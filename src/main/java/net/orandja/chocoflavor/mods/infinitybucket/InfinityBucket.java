@@ -2,8 +2,7 @@ package net.orandja.chocoflavor.mods.infinitybucket;
 
 import net.minecraft.block.*;
 import net.minecraft.block.cauldron.CauldronBehavior;
-import net.minecraft.block.dispenser.ItemDispenserBehavior;
-import net.minecraft.block.entity.DispenserBlockEntity;
+import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -24,7 +23,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import net.orandja.chocoflavor.mods.core.BlockWithEnchantment;
 import net.orandja.chocoflavor.mods.core.EnchantMore;
+import net.orandja.chocoflavor.utils.ReflectUtils;
+import net.orandja.chocoflavor.utils.Utils;
 
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -42,20 +45,17 @@ public interface InfinityBucket {
 
     BlockState FILLED_WITH_WATER = Blocks.WATER_CAULDRON.getDefaultState().with(LeveledCauldronBlock.LEVEL, 3);
     BlockState DEFAULT_CAULDRON = Blocks.CAULDRON.getDefaultState();
+    BlockState LAVA_CAULDRON = Blocks.LAVA_CAULDRON.getDefaultState();
     static boolean isCauldronFull(BlockState state) {
-        return state.get(LeveledCauldronBlock.LEVEL) == 3;
-    }
-
-    class FallbackDispenserBehavior extends ItemDispenserBehavior {
-        @Override
-        public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
-            return super.dispenseSilently(pointer, stack);
-        }
+        return state.getBlock() instanceof AbstractCauldronBlock block && block.isFull(state);
     }
 
     BlockWithEnchantment.EnchantmentArraySetting ENABLING = new BlockWithEnchantment.EnchantmentArraySetting("infinitybucket.enabling.enchantments", new Enchantment[] { Enchantments.INFINITY });
     BlockWithEnchantment.EnchantmentArraySetting CAPACITY = new BlockWithEnchantment.EnchantmentArraySetting("infinitybucket.capacity.enchantments", new Enchantment[] { Enchantments.EFFICIENCY });
     static void beforeLaunch() {
+        AtomicReference<Map<Item, DispenserBehavior>> BEHAVIORS = new AtomicReference<>();
+        ReflectUtils.getDeclaredField(DispenserBlock.class, null, field -> field.getType().equals(Map.class), BEHAVIORS::set);
+
         EnchantMore.addComplex(Items.BUCKET, (enchantment, stack) -> {
             if(stack.getCount() == 1) {
                 if(ENABLING.contains(enchantment)) {
@@ -69,55 +69,23 @@ public interface InfinityBucket {
 
             return false;
         });
-//        EnchantMore.addBasic(Items.BUCKET, Enchantments.INFINITY);
         EnchantMore.addBasic(Items.WATER_BUCKET, Enchantments.INFINITY);
 
         CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(Items.WATER_BUCKET, (state, world, pos, player, hand, stack) ->
-            handleCauldron(true, world, pos, player, hand, stack, new ItemStack(Items.BUCKET), FILLED_WITH_WATER, SoundEvents.ITEM_BUCKET_EMPTY, null));
+            handleCauldron(true, world, pos, player, hand, stack, new ItemStack(Items.BUCKET), state, FILLED_WITH_WATER, SoundEvents.ITEM_BUCKET_FILL, null));
         CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(Items.WATER_BUCKET, (state, world, pos, player, hand, stack) ->
-                handleCauldron(true, world, pos, player, hand, stack, new ItemStack(Items.WATER_BUCKET), FILLED_WITH_WATER, SoundEvents.ITEM_BUCKET_EMPTY, null));
+            handleCauldron(true, world, pos, player, hand, stack, new ItemStack(Items.BUCKET), state, FILLED_WITH_WATER, SoundEvents.ITEM_BUCKET_FILL, it -> !InfinityBucket.isCauldronFull(it)));
+
         CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) ->
-                handleCauldron(false, world, pos, player, hand, stack, new ItemStack(Items.WATER_BUCKET), DEFAULT_CAULDRON, SoundEvents.ITEM_BUCKET_FILL, InfinityBucket::isCauldronFull));
+            handleCauldron(false, world, pos, player, hand, stack, new ItemStack(Items.WATER_BUCKET), state, DEFAULT_CAULDRON, SoundEvents.ITEM_BUCKET_EMPTY, InfinityBucket::isCauldronFull));
+        CauldronBehavior.LAVA_CAULDRON_BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) ->
+            handleCauldron(false, world, pos, player, hand, stack, new ItemStack(Items.LAVA_BUCKET), state, DEFAULT_CAULDRON, SoundEvents.ITEM_BUCKET_EMPTY, InfinityBucket::isCauldronFull));
 
-        FallbackDispenserBehavior fallbackBehavior = new FallbackDispenserBehavior();
-        DispenserBlock.registerBehavior(Items.WATER_BUCKET, (BlockPointer pointer, ItemStack stack) -> {
-            if(stack.getItem() instanceof FluidModificationItem fluidItem) {
-                BlockPos blockPos = pointer.pos().offset(pointer.state().get(DispenserBlock.FACING));
-                World world = pointer.world();
-                if(fluidItem.placeFluid(null, world, blockPos, null)) {
-                    fluidItem.onEmptied(null, world, stack, blockPos);
-                    if(isInfinity(stack)) {
-                        return stack;
-                    }
-                    return new ItemStack(Items.BUCKET);
-                }
-            }
-            return fallbackBehavior.dispense(pointer, stack);
-        });
+        DispenserBehavior WATER_BUCKET_DEFAULT = BEHAVIORS.get().get(Items.WATER_BUCKET);
+        DispenserBlock.registerBehavior(Items.WATER_BUCKET, (BlockPointer pointer, ItemStack stack) -> Utils.run(WATER_BUCKET_DEFAULT.dispense(pointer, stack), it -> isInfinity(stack) ? stack : it));
 
-        DispenserBlock.registerBehavior(Items.BUCKET, (pointer, stack) -> {
-            BlockPos blockPos;
-            BlockState state = pointer.world().getBlockState(blockPos = pointer.pos().offset(pointer.state().get(DispenserBlock.FACING)));
-            Block block = state.getBlock();
-            if(!(block instanceof FluidDrainable fluidBlock) || fluidBlock.tryDrainFluid(null, pointer.world(), blockPos, state).isEmpty()) {
-                return fallbackBehavior.dispenseSilently(pointer, stack);
-            }
-
-            pointer.world().emitGameEvent(null, GameEvent.FLUID_PICKUP, blockPos);
-            if(isInfinity(stack)) {
-                return stack;
-            }
-
-            Item item = stack.getItem();
-            stack.decrement(1);
-            if(stack.isEmpty()) {
-                return new ItemStack(item);
-            }
-            if(pointer.blockEntity().addToFirstFreeSlot(new ItemStack(item)) < 0) {
-                fallbackBehavior.dispense(pointer, new ItemStack(item));
-            }
-            return stack;
-        });
+        DispenserBehavior EMPTY_BUCKET_DEFAULT = BEHAVIORS.get().get(Items.BUCKET);
+        DispenserBlock.registerBehavior(Items.BUCKET, (pointer, stack) -> Utils.run(EMPTY_BUCKET_DEFAULT.dispense(pointer, stack), it -> isInfinity(stack) ? stack : it));
     }
 
     private static ItemStack getInfinityBucketOrCompute(ItemStack stack, PlayerEntity player, Supplier<ItemStack> supplier) {
@@ -132,7 +100,7 @@ public interface InfinityBucket {
     }
 
     static ActionResult handleCauldron(boolean fill, World world, BlockPos pos, PlayerEntity player, Hand hand,
-                                       ItemStack stack, ItemStack output, BlockState state, SoundEvent soundEvent, Predicate<BlockState> predicate) {
+                                       ItemStack stack, ItemStack output, BlockState state, BlockState newState, SoundEvent soundEvent, Predicate<BlockState> predicate) {
         if(!fill && !predicate.test(state)) {
             return ActionResult.PASS;
         }
@@ -141,7 +109,7 @@ public interface InfinityBucket {
             player.setStackInHand(hand, handleInfinityBucket(stack, player, output));
             player.incrementStat(fill ? Stats.FILL_CAULDRON : Stats.USE_CAULDRON);
             player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
-            world.setBlockState(pos, fill ? state : Blocks.CAULDRON.getDefaultState());
+            world.setBlockState(pos, fill ? newState : Blocks.CAULDRON.getDefaultState());
             world.playSound(null, pos, soundEvent, SoundCategory.BLOCKS, 1.0f, 1.0f);
             world.emitGameEvent(null, fill ? GameEvent.FLUID_PLACE : FLUID_PICKUP, pos);
         }

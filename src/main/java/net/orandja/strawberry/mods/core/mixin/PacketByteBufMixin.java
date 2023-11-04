@@ -9,6 +9,7 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.collection.IndexedIterable;
+import net.orandja.strawberry.mods.core.CustomItemsAndBlocks;
 import net.orandja.strawberry.mods.core.intf.StrawberryBlockState;
 import net.orandja.strawberry.mods.core.intf.StrawberryItem;
 import org.jetbrains.annotations.Nullable;
@@ -47,7 +48,10 @@ public abstract class PacketByteBufMixin {
             this.writeNbt(nbtCompound);
 
             info.cancel();
+            return;
         }
+
+        CustomItemsAndBlocks.interceptStringStack(stack);
     }
 
     @Inject(method = "writeRegistryValue", at = @At("HEAD"), cancellable = true)

@@ -2,6 +2,7 @@ package net.orandja.chocoflavor.mods.doubletools.mixin;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.MangroveRootsBlock;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,7 +13,10 @@ import net.orandja.chocoflavor.mods.doubletools.DoubleTools;
 import org.spongepowered.asm.mixin.Mixin;
 
 @SuppressWarnings("unused")
-@Mixin(PillarBlock.class)
+@Mixin(value = {
+        PillarBlock.class,
+        MangroveRootsBlock.class
+})
 public abstract class PillarBlockMixin extends Block implements DoubleTools {
 
     public PillarBlockMixin(Settings settings) {

@@ -23,7 +23,6 @@ import net.orandja.chocoflavor.mods.core.BlockWithEnchantment;
 import net.orandja.chocoflavor.mods.core.EnchantMore;
 import net.orandja.chocoflavor.mods.core.accessor.ItemFrameEntityAccessor;
 import net.orandja.chocoflavor.utils.StackUtils;
-import net.orandja.chocoflavor.utils.Utils;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -139,5 +138,9 @@ public interface DeepStorageBarrel extends BlockWithEnchantment {
             }
         }
         superSetStack.accept(slot, stack);
+    }
+
+    default boolean hasEnchantments() {
+        return this.getEnchantmentDictionary().hasEnchantments();
     }
 }

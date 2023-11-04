@@ -329,6 +329,7 @@
     "minecraft:mud_brick_stairs",
     "minecraft:mud_brick_slab",
     "minecraft:packed_mud",
-    "minecraft:reinforced_obsidian"
+    "minecraft:reinforced_obsidian",
+    "minecraft:muffler"
   ]
 }

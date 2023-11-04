@@ -38,14 +38,17 @@
 		"mixins/infinitybucket.mixins.json",
 		"mixins/kelpfix.mixins.json",
 		"mixins/nerfedentity.mixins.json",
+		"mixins/tools.mixins.json",
 		"mixins/transferenchant.mixins.json",
 		"mixins/whitelistedchestblock.mixins.json",
 
 		"strawberry/core.mixins.json",
 		"strawberry/core.ac.mixins.json",
 		"strawberry/moretools.mixins.json",
-		"strawberry/pack.mixins.json"
+		"strawberry/extra.mixins.json",
+		"strawberry/muffler.mixins.json"
 	],
+	"accessWidener" : "chocoflavor.accesswidener",
 	"depends": {
 		"fabricloader": ">=0.14.22",
 		"minecraft": "~1.20.2",

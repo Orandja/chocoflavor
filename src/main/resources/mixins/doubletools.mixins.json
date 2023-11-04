@@ -8,6 +8,7 @@
     "PillarBlockMixin",
     "ServerPlayerEntityMixin",
     "ShovelItemMixin",
+    "ShearsItemMixin",
     "ChocoFlavorInit"
   ],
   "client": [

@@ -9,6 +9,10 @@ import java.util.function.Supplier;
 
 public class ReflectUtils {
 
+    public static <T> void getDeclaredField(Class<?> clazz, Object obj, Predicate<Field> predicate, Consumer<T> consumer) {
+        getFieldFrom(clazz.getDeclaredFields(), obj, predicate, consumer);
+    }
+
     public static <T> void getDeclaredField(Object obj, Predicate<Field> predicate, Consumer<T> consumer) {
         getFieldFrom(obj.getClass().getDeclaredFields(), obj, predicate, consumer);
     }
@@ -19,9 +23,10 @@ public class ReflectUtils {
                 try {
                     field.setAccessible(true);
                     consumer.accept((T) field.get(obj));
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                    Utils.log(e);
+                }
             }
-            return;
         }
     }
 
@@ -32,6 +37,10 @@ public class ReflectUtils {
 
     public static <T> void getField(Object obj, Predicate<Field> predicate, Consumer<T> consumer) {
         getFieldFrom(obj.getClass().getFields(), obj, predicate, consumer);
+    }
+
+    public static <T> void getField(Class<?> clazz, Object obj, Predicate<Field> predicate, Consumer<T> consumer) {
+        getFieldFrom(clazz.getFields(), obj, predicate, consumer);
     }
 
     public static <T> void setDeclaredField(Object obj, Predicate<Field> predicate, Supplier<T> supplier) {

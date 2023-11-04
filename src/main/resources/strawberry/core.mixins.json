@@ -14,7 +14,8 @@
     "ServerPlayerInteractionManagerMixin",
     "ServerPlayerEntityMixin",
     "MarkerEntityMixin",
-    "TripwireHookBlockMixin"
+    "ServerChunkManagerMixin",
+    "AnvilScreenHandlerMixin"
   ],
   "client": [
   ],

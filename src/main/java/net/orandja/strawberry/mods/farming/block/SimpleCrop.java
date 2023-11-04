@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.orandja.strawberry.mods.core.NoteBlockData;
+import net.orandja.strawberry.mods.core.TripWireBlockData;
 import net.orandja.strawberry.mods.core.intf.StrawberryBlockState;
 import net.orandja.strawberry.mods.resourcepack.StrawberryResourcePackGenerator;
 
@@ -56,10 +57,10 @@ public class SimpleCrop extends CropBlock implements StrawberryBlockState {
     @Override
     public BlockState transform(BlockState blockState) {
         return switch (blockState.get(getAgeProperty())) {
-            case 2, 3 -> NoteBlockData.assignStateProperties(this.id + 1);
-            case 4, 5, 6 -> NoteBlockData.assignStateProperties(this.id + 2);
-            case 7 -> NoteBlockData.assignStateProperties(this.id + 3);
-            default -> NoteBlockData.assignStateProperties(this.id);
+            case 2, 3 -> TripWireBlockData.assignStateProperties(this.id + 1);
+            case 4, 5, 6 -> TripWireBlockData.assignStateProperties(this.id + 2);
+            case 7 -> TripWireBlockData.assignStateProperties(this.id + 3);
+            default -> TripWireBlockData.assignStateProperties(this.id);
         };
     }
 
@@ -70,7 +71,7 @@ public class SimpleCrop extends CropBlock implements StrawberryBlockState {
     @Override
     public void register() {
         for(int i = 0; i < 4; i++) {
-            register(this.id + i, this.getModel() + i);
+            StrawberryResourcePackGenerator.tripWireModels.put(TripWireBlockData.fromID(this.id + i), "minecraft:block/" + this.getModel() + i);
         }
     }
 }
