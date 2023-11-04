@@ -1,0 +1,20 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "minecraft:item/stone_axe"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 1
+      },
+      "model": "minecraft:item/copper_axe"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 2
+      },
+      "model": "minecraft:item/deepslate_axe"
+    }
+  ]
+}

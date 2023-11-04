@@ -1,0 +1,20 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "minecraft:item/diamond_axe"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 1
+      },
+      "model": "minecraft:item/obsidian_axe"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 2
+      },
+      "model": "minecraft:item/crying_obsidian_axe"
+    }
+  ]
+}

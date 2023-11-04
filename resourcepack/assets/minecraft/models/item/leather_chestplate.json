@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 1
+      },
+      "model": "minecraft:item/copper_chestplate"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 2
+      },
+      "model": "minecraft:item/emerald_chestplate"
+    }
+  ],
+  "textures": {
+    "layer0": "minecraft:item/leather_chestplate",
+    "layer1": "minecraft:item/leather_chestplate_overlay"
+  }
+}
