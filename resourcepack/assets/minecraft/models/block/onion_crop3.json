@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/crop",
-  "ambientocclusion": false,
-  "textures": {
-    "crop": "minecraft:block/onions_stage3"
-  }
-}
