@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.orandja.chocoflavor.ChocoFlavor;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
@@ -17,8 +18,8 @@ public abstract class PlayerUtils {
         return areBothTools(player, clazz) && player.getMainHandStack().isSuitableFor(state);
     }
 
-    public static boolean areBothTools(PlayerEntity player, Class<?> clazz) {
-        return clazz.isAssignableFrom(player.getMainHandStack().getItem().getClass()) &&
+    public static boolean areBothTools(@Nullable PlayerEntity player, Class<?> clazz) {
+        return player != null && clazz.isAssignableFrom(player.getMainHandStack().getItem().getClass()) &&
                 clazz.isAssignableFrom(player.getOffHandStack().getItem().getClass()) &&
                 StackUtils.getToolMaterial(player.getMainHandStack()) == StackUtils.getToolMaterial(player.getOffHandStack());
     }

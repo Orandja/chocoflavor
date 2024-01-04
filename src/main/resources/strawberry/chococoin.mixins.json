@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "package": "net.orandja.strawberry.mods.chococoin.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "ChocoFlavorInit",
+    "TraderOfferMixin",
+    "TradeOutputSlotMixin",
+    "MerchantScreenHandlerMixin",
+    "MerchantInventoryMixin",
+    "MerchantEntityMixin",
+    "TradeOfferListMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

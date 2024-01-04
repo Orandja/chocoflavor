@@ -3,8 +3,8 @@
   "package": "net.orandja.strawberry.mods.moretools.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ChocoFlavorInit",
-    "EnchantmentMixin"
+    "net.orandja.strawberry.mixin.StrawberryCustomTools_InitMixin",
+    "net.orandja.strawberry.mixin.StrawberryCustomTools_EnchantmentMixin"
   ],
   "client": [
   ],

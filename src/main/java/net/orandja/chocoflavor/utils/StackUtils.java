@@ -1,12 +1,14 @@
 package net.orandja.chocoflavor.utils;
 
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.util.Pair;
 import net.minecraft.util.collection.DefaultedList;
-import net.orandja.chocoflavor.mods.doubletools.DoubleTools;
+import net.orandja.chocoflavor.ChocoTools;
 
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -18,6 +20,10 @@ public abstract class StackUtils {
     }
     public static boolean canMerge(ItemStack into, ItemStack from, int countFromSecond) {
         return Objects.equals(into.getItem(), from.getItem()) && Objects.equals(into.getDamage(), from.getDamage()) && ((into.getCount() + countFromSecond) <= into.getMaxCount()) && Objects.equals(into.getNbt(), from.getNbt());
+    }
+
+    public static int getHandSlotForStack(PlayerEntity player, ItemStack stack) {
+        return player.getMainHandStack().equals(stack) ? player.getInventory().selectedSlot : PlayerInventory.OFF_HAND_SLOT;
     }
 
     public static boolean isGonnaBreak(ItemStack stack) {
@@ -71,6 +77,10 @@ public abstract class StackUtils {
         }
 
         return count;
+    }
+
+    public static boolean hasMinimum(ItemStack stack, int minimum) {
+        return !stack.isEmpty() && stack.getCount() >= minimum;
     }
 
     public static void toNBT(DefaultedList<ItemStack> list, NbtCompound nbt) {
@@ -132,7 +142,7 @@ public abstract class StackUtils {
             return tool.getMaterial();
         }
 
-        if(stack.getItem() instanceof DoubleTools.Applicable tool) {
+        if(stack.getItem() instanceof ChocoTools.MaterialSupplier tool) {
             return tool.getMaterial();
         }
 

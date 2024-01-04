@@ -14,18 +14,19 @@ public class ChocoFlavor implements ModInitializer {
 
     public static final Logger LOGGER = LogManager.getLogger("chocoflavor");
     public static AtomicReference<MinecraftServer> serverReference = new AtomicReference<>(null);
+    private boolean launched;
 
     @Override
     public void onInitialize() {
             Settings.load("chocoflavor");
 
-            beforeLaunch();
+            duringInit();
             ServerLifecycleEvents.SERVER_STARTED.register(server -> {
                 serverReference.set(server);
             });
     }
 
-    public void beforeLaunch() {
+    public void duringInit() {
         CauldronBucketInteraction.beforeLaunch();
     }
 }

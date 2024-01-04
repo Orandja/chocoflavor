@@ -1,0 +1,33 @@
+{
+  "required": true,
+  "package": "net.orandja.strawberry.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "MufflerBlock_ServerWorldMixin",
+    "StrawberryChestUI_ChestBlockEntityMixin",
+    "StrawberryCustomBlocks_AbstractBlockMixin",
+    "StrawberryCustomBlocks_BlockUpdateS2CPacketMixin",
+    "StrawberryCustomBlocks_ChunkDataMixin",
+    "StrawberryCustomBlocks_ChunkDeltaUpdateS2CPacketMixin",
+    "StrawberryCustomBlocks_DirectRegistryPacketHandlerMixin",
+    "StrawberryCustomBlocks_InitMixin",
+    "StrawberryCustomBlocks_PacketByteBufMixin",
+    "StrawberryCustomBlocks_PaletteMixin",
+    "StrawberryCustomBlocks_ServerChunkManagerMixin",
+    "StrawberryCustomBlocks_ServerPlayerEntityMixin",
+    "StrawberryCustomBlocks_ServerPlayerInteractionManagerMixin",
+    "StrawberryCustomTools_EnchantmentMixin",
+    "StrawberryCustomTools_InitMixin",
+    "StrawberryCustomTools_ServerWorldMixin",
+    "StrawberryEnchantedBlockUI_BarrelBlockEntityMixin",
+    "StrawberryEnchantedBlockUI_BrewingStandBlockEntityMixin",
+    "StrawberryEnchantedBlockUI_FurnaceBlockEntityMixin",
+    "StrawberryEnchantedBlockUI_HopperBlockEntityMixin",
+    "StrawberryExtraUI_ServerPlayerEntityMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

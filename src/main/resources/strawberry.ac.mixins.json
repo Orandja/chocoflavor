@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "net.orandja.strawberry.accessor",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "BlockEntityTypeAccessor"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

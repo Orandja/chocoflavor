@@ -12,9 +12,9 @@ import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Util;
-import net.orandja.strawberry.mods.core.item.SimpleBlockItem;
-import net.orandja.strawberry.mods.core.item.SimpleCustomItem;
-import net.orandja.strawberry.mods.core.item.SimpleSeedItem;
+import net.orandja.strawberry.item.StrawberryBlockItem;
+import net.orandja.strawberry.item.StrawberryItem;
+import net.orandja.strawberry.item.StrawberrySeedItem;
 import net.orandja.strawberry.mods.farming.block.BoilerBlock;
 import net.orandja.strawberry.mods.farming.block.SimpleCrop;
 import net.orandja.strawberry.mods.farming.block.entity.BoilerBlockEntity;
@@ -58,7 +58,6 @@ public class Farming {
 
 
     public static void beforeLaunch() {
-
         //Crops
         RICE_CROP = Blocks.register("rice_crop", new SimpleCrop(2, () -> RICE_SEEDS));
         CABBAGE_CROP = Blocks.register("cabbage_crop", new SimpleCrop(6, () -> CABBAGE_SEEDS));
@@ -66,30 +65,30 @@ public class Farming {
         TOMATO_CROP = Blocks.register("tomato_crop", new SimpleCrop(14, () -> TOMATO_SEEDS));
 
         //Seeds
-        RICE_SEEDS = Items.register("rice_seeds", new SimpleSeedItem(RICE_CROP, 1, new Item.Settings()));
-        CABBAGE_SEEDS = Items.register("cabbage_seeds", new SimpleSeedItem(CABBAGE_CROP, 5, new Item.Settings()));
-        ONION_SEEDS = Items.register("onion_seeds", new SimpleSeedItem(ONION_CROP, 9, new Item.Settings()));
-        TOMATO_SEEDS = Items.register("tomato_seeds", new SimpleSeedItem(TOMATO_CROP, 13, new Item.Settings()));
+        RICE_SEEDS = Items.register("rice_seeds", new StrawberrySeedItem(RICE_CROP, 1, new Item.Settings()));
+        CABBAGE_SEEDS = Items.register("cabbage_seeds", new StrawberrySeedItem(CABBAGE_CROP, 5, new Item.Settings()));
+        ONION_SEEDS = Items.register("onion_seeds", new StrawberrySeedItem(ONION_CROP, 9, new Item.Settings()));
+        TOMATO_SEEDS = Items.register("tomato_seeds", new StrawberrySeedItem(TOMATO_CROP, 13, new Item.Settings()));
 
         //Ingredients
-        RICE = Items.register("rice", new SimpleCustomItem("Rice", Items.WHEAT, 1, new Item.Settings()));
-        COOKED_RICE = Items.register("cooked_rice", new SimpleCustomItem("Cooked Rice", Items.BAKED_POTATO, 1, new Item.Settings().food(FoodComponents.BAKED_POTATO)));
+        RICE = Items.register("rice", new StrawberryItem(Items.WHEAT, 1, new Item.Settings()));
+        COOKED_RICE = Items.register("cooked_rice", new StrawberryItem(Items.BAKED_POTATO, 1, new Item.Settings().food(FoodComponents.BAKED_POTATO)));
 
-        CABBAGE = Items.register("cabbage", new SimpleCustomItem("Cabbage", Items.WHEAT, 2, new Item.Settings()));
-        CABBAGE_LEAF = Items.register("cabbage_leaf", new SimpleCustomItem("Cabbage Leaf", Items.BAKED_POTATO, 2, new Item.Settings()));
-        ONION = Items.register("onion", new SimpleCustomItem("Onion", Items.BAKED_POTATO, 3, new Item.Settings()));
-        MINCED_BEEF = Items.register("minced_beef", new SimpleCustomItem("Minced Beef", Items.BEEF, 1, new Item.Settings()));
-        MINCED_PORK = Items.register("minced_pork", new SimpleCustomItem("Minced Pork", Items.PORKCHOP, 1, new Item.Settings()));
-        RAW_BACON = Items.register("raw_bacon", new SimpleCustomItem("Raw Bacon", Items.PORKCHOP, 2, new Item.Settings()));
-        TOMATO = Items.register("tomato", new SimpleCustomItem("Tomato", Items.BAKED_POTATO, 4, new Item.Settings()));
+        CABBAGE = Items.register("cabbage", new StrawberryItem(Items.WHEAT, 2, new Item.Settings()));
+        CABBAGE_LEAF = Items.register("cabbage_leaf", new StrawberryItem(Items.BAKED_POTATO, 2, new Item.Settings()));
+        ONION = Items.register("onion", new StrawberryItem(Items.BAKED_POTATO, 3, new Item.Settings()));
+        MINCED_BEEF = Items.register("minced_beef", new StrawberryItem(Items.BEEF, 1, new Item.Settings()));
+        MINCED_PORK = Items.register("minced_pork", new StrawberryItem(Items.PORKCHOP, 1, new Item.Settings()));
+        RAW_BACON = Items.register("raw_bacon", new StrawberryItem(Items.PORKCHOP, 2, new Item.Settings()));
+        TOMATO = Items.register("tomato", new StrawberryItem(Items.BAKED_POTATO, 4, new Item.Settings()));
 
         // Meals
-        OYAKODON = Items.register("oyakodon", new SimpleCustomItem("Oyakodon", Items.BEETROOT_SOUP, 1, new Item.Settings().maxCount(1).food(FoodComponents.BEETROOT_SOUP)));
+        OYAKODON = Items.register("oyakodon", new StrawberryItem(Items.BEETROOT_SOUP, 1, new Item.Settings().maxCount(1).food(FoodComponents.BEETROOT_SOUP)));
 
         //Blocks
         BOILER = Blocks.register("boiler", new BoilerBlock());
         BOILER_ENTITY = createBlockEntity("boiler", BlockEntityType.Builder.create(BoilerBlockEntity::new, BOILER));
-        BOILER_ITEM = Items.register(new SimpleBlockItem(BOILER, 17, new Item.Settings()));
+        BOILER_ITEM = Items.register(new StrawberryBlockItem(BOILER, 17, new Item.Settings()));
     }
 
     private static <T extends BlockEntity> BlockEntityType<T> createBlockEntity(String id, BlockEntityType.Builder<T> builder) {

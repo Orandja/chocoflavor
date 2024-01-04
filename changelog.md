@@ -1,3 +1,22 @@
+## 0.4
+### More Tools
+> Added shears made of: Copper, Diamond, Netherite, Obsidian, Crying Obsidian and Reinforced Obsidian.
+> |     |                |  |
+> |---------|----------------------|------------|
+> | <img src="https://minecraft.wiki/images/Invicon_Diamond.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Diamond.png" width="32" height="32"> |
+> | <img src="https://minecraft.wiki/images/Invicon_Shears.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Diamond.png" width="32" height="32"> |
+> |     |                |  |
+> |---------|----------------------|------------|
+> | <img src="https://minecraft.wiki/images/Invicon_Netherite_Ingot.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Netherite_Ingot.png" width="32" height="32"> |
+> | <img src="https://minecraft.wiki/images/Invicon_Shears.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Netherite_Ingot.png" width="32" height="32"> |
+> |     |                |  |
+> |---------|----------------------|------------|
+> | <img src="https://minecraft.wiki/images/Invicon_Obsidian.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Obsidian.png" width="32" height="32"> |
+> | <img src="https://minecraft.wiki/images/Invicon_Shears.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Obsidian.png" width="32" height="32"> |
+> |     |                |  |
+> |---------|----------------------|------------|
+> |  | <img src="https://minecraft.wiki/images/Invicon_Copper_Ingot.png" width="32" height="32"> |
+> | <img src="https://minecraft.wiki/images/Invicon_Copper_Ingot.png" width="32" height="32"> |  |
 ## 0.3
 ### Bugs fixes
 > Infinity Buckets won't be transformed into Lava Bucket without enchantments when emptying a Lava Cauldron.

@@ -11,15 +11,15 @@ import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import net.minecraft.screen.*;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.orandja.strawberry.mods.core.intf.StrawberryItem;
-import net.orandja.strawberry.mods.core.screen.OverlayedScreenHandler;
-import net.orandja.strawberry.mods.core.screen.RedirectOutputSlot;
-import net.orandja.strawberry.mods.core.screen.RedirectSlot;
+import net.orandja.strawberry.intf.StrawberryItemHandler;
+import net.orandja.strawberry.screen.OverlayedScreenHandler;
+import net.orandja.strawberry.screen.RedirectOutputSlot;
+import net.orandja.strawberry.screen.RedirectSlot;
 
 public class BoilerScreenHandler extends OverlayedScreenHandler {
 
-    public static final ItemStack PROGRESS_0_21 = StrawberryItem.createStrawberryStack(Items.BARRIER, 10021, "");
-    public static final ItemStack PROGRESS_15_21 = StrawberryItem.createStrawberryStack(Items.BARRIER, 11521, "");
+    public static final ItemStack PROGRESS_0_21 = StrawberryItemHandler.createStrawberryStack(Items.BARRIER, 10021, "");
+    public static final ItemStack PROGRESS_15_21 = StrawberryItemHandler.createStrawberryStack(Items.BARRIER, 11521, "");
 
     public final PlayerEntity player;
 

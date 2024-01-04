@@ -19,34 +19,11 @@
 		]
 	},
 	"mixins": [
-		"mixins/core.mixins.json",
-		"mixins/core.ac.mixins.json",
-		"mixins/animaltemptation.mixins.json",
-		"mixins/bowmendinginfinity.mixins.json",
-		"mixins/brewingstandwithenchantment.mixins.json",
-		"mixins/cloudshulkerbox.mixins.json",
-		"mixins/cloudshulkerbox.ac.mixins.json",
-		"mixins/craftingdispenser.mixins.json",
-		"mixins/cropsdropexperience.mixins.json",
-		"mixins/deathmessage.mixins.json",
-		"mixins/deepstoragebarrel.mixins.json",
-		"mixins/doubletools.mixins.json",
-		"mixins/fastermobspawner.mixins.json",
-		"mixins/furnacewithenchantment.mixins.json",
-		"mixins/higherenchantmentlevel.mixins.json",
-		"mixins/hopperwithenchantment.mixins.json",
-		"mixins/infinitybucket.mixins.json",
-		"mixins/kelpfix.mixins.json",
-		"mixins/nerfedentity.mixins.json",
-		"mixins/tools.mixins.json",
-		"mixins/transferenchant.mixins.json",
-		"mixins/whitelistedchestblock.mixins.json",
+		"chocoflavor.mixins.json",
+		"chocoflavor.ac.mixins.json",
 
-		"strawberry/core.mixins.json",
-		"strawberry/core.ac.mixins.json",
-		"strawberry/moretools.mixins.json",
-		"strawberry/extra.mixins.json",
-		"strawberry/muffler.mixins.json"
+		"strawberry.mixins.json",
+		"strawberry.ac.mixins.json"
 	],
 	"accessWidener" : "chocoflavor.accesswidener",
 	"depends": {

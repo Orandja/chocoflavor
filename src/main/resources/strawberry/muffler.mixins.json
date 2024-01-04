@@ -4,7 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "ChocoFlavorInit",
-    "ServerWorldMixin"
+    "net.orandja.strawberry.mixin.Muffler_ServerWorldMixin"
   ],
   "client": [
   ],

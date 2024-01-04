@@ -7,20 +7,16 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
-import net.orandja.strawberry.mods.core.intf.CustomBlockEntity;
-import net.orandja.strawberry.mods.core.screen.OverlayedScreenHandler;
+import net.orandja.strawberry.intf.StrawberryBlockEntity;
+import net.orandja.strawberry.screen.OverlayedScreenHandler;
 import net.orandja.strawberry.mods.farming.Farming;
 import net.orandja.strawberry.mods.farming.screen.BoilerScreenHandler;
 
-public class BoilerBlockEntity extends LockableContainerBlockEntity implements CustomBlockEntity {
+public class BoilerBlockEntity extends LockableContainerBlockEntity implements StrawberryBlockEntity {
 
     private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(4, ItemStack.EMPTY);
 

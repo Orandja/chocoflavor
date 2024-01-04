@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "package": "net.orandja.chocoflavor.accessor",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "LootContextBuilderAccessor",
+    "CraftingInventoryAccessor",
+    "CraftingScreenHandlerAccessor",
+    "PlayerScreenHandlerAccessor",
+    "ScreenHandlerAccessor",
+    "ItemFrameEntityAccessor",
+    "LootContextParameterSetAccessor",
+    "AnvilScreenHandlerAccessor",
+    "DispenserBlockAccessor"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

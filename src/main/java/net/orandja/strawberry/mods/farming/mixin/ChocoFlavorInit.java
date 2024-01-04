@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ChocoFlavorInit implements ModInitializer {
 
         @SuppressWarnings("UnresolvedMixinReference")
-        @Inject(at = @At("RETURN"), method = "beforeLaunch")
+        @Inject(at = @At("RETURN"), method = "duringInit")
         public void initialize(CallbackInfo info) {
                 Farming.beforeLaunch();
         }

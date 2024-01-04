@@ -8,10 +8,8 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
-import net.orandja.strawberry.mods.core.NoteBlockData;
-import net.orandja.strawberry.mods.core.TripWireBlockData;
-import net.orandja.strawberry.mods.core.intf.StrawberryBlockState;
-import net.orandja.strawberry.mods.resourcepack.StrawberryResourcePackGenerator;
+import net.orandja.strawberry.block.TripWireBlockData;
+import net.orandja.strawberry.intf.StrawberryBlockState;
 
 public class SimpleCrop extends CropBlock implements StrawberryBlockState {
 
@@ -70,8 +68,5 @@ public class SimpleCrop extends CropBlock implements StrawberryBlockState {
 
     @Override
     public void register() {
-        for(int i = 0; i < 4; i++) {
-            StrawberryResourcePackGenerator.tripWireModels.put(TripWireBlockData.fromID(this.id + i), "minecraft:block/" + this.getModel() + i);
-        }
     }
 }

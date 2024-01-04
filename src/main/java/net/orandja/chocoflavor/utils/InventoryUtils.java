@@ -8,10 +8,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.CraftingScreenHandler;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.screen.ScreenHandler;
-import net.orandja.chocoflavor.mods.core.accessor.CraftingInventoryAccessor;
-import net.orandja.chocoflavor.mods.core.accessor.CraftingScreenHandlerAccessor;
-import net.orandja.chocoflavor.mods.core.accessor.PlayerScreenHandlerAccessor;
-import net.orandja.chocoflavor.mods.core.accessor.ScreenHandlerAccessor;
+import net.orandja.chocoflavor.accessor.CraftingInventoryAccessor;
+import net.orandja.chocoflavor.accessor.CraftingScreenHandlerAccessor;
+import net.orandja.chocoflavor.accessor.PlayerScreenHandlerAccessor;
+import net.orandja.chocoflavor.accessor.ScreenHandlerAccessor;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 
 public abstract class InventoryUtils {
 
-    public static PlayerEntity getPlayer(RecipeInputInventory inventory) {
+    public static PlayerEntity getCraftingPlayer(RecipeInputInventory inventory) {
         ScreenHandler handler = getScreenHandler(inventory);
         if(handler instanceof CraftingScreenHandler && handler instanceof CraftingScreenHandlerAccessor accessor) {
             return accessor.getPlayer();

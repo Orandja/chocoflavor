@@ -4,16 +4,14 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "CraftingResultSlotMixin",
-    "EnchantmentMixin",
     "ExperienceOrbEntityMixin",
-    "ExplosionMixin",
     "FillCommandMixin",
-    "HandledScreenMixin",
-    "PlayerEntityMixin",
     "RecipeManagerMixin",
     "ServerWorldMixin",
-    "HopperBlockEntityMixin",
-    "LeavesBlockMixin"
+    "LeavesBlockMixin",
+    "InfinityEnchantmentMixin",
+    "CropBlockMixin",
+    "DamageTrackerMixin"
   ],
   "client": [
   ],

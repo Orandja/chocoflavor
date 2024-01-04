@@ -8,8 +8,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.orandja.strawberry.mods.core.NoteBlockData;
-import net.orandja.strawberry.mods.core.intf.StrawberryBlockState;
+import net.orandja.strawberry.block.NoteBlockData;
+import net.orandja.strawberry.intf.StrawberryBlockState;
 import net.orandja.strawberry.mods.farming.block.entity.BoilerBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
