@@ -1,4 +1,6 @@
 ## 0.4
+### Global Refactoring
+> A large portion of the code was rewritten to put the multiple parts that affected the same game mechanics together.
 ### More Tools
 > Added shears made of: Copper, Diamond, Netherite, Obsidian, Crying Obsidian and Reinforced Obsidian.
 > |     |                |  |
@@ -17,6 +19,54 @@
 > |---------|----------------------|------------|
 > |  | <img src="https://minecraft.wiki/images/Invicon_Copper_Ingot.png" width="32" height="32"> |
 > | <img src="https://minecraft.wiki/images/Invicon_Copper_Ingot.png" width="32" height="32"> |  |
+### Chests
+> An extra UI is added to the WhitelistedChests to show which players are allowed.
+### DoubleTools
+> Shovels and Pickaxes have two new modes to break a square of 3x3 going down from the block destroyed.  
+> Axes and Hoes no longer have a task list since they only had one to begin with.
+### Furnaces
+> Furnaces can now be enchanted in the enchanting table with a low enchantability rate. This was implemented to help with speeding up the early game.
+### Hoppers
+> Efficiency no longer reduces the cooldown of the hopper, but repeats the extration 
+### Ingot Charger
+> Used to charge any kind of Charged Ingot with lightnings.  
+> You'll need to put a Lightning Rod over it to be able to use it.  
+> |     |                |  |
+> |---------|----------------------|------------|
+> | <img src="https://minecraft.wiki/images/Invicon_Cobblestone.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Block_of_Copper.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Cobblestone.png" width="32" height="32"> |
+> | <img src="https://minecraft.wiki/images/Invicon_Cobblestone.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Block_of_Redstone.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Cobblestone.png" width="32" height="32"> |
+> | <img src="https://minecraft.wiki/images/Invicon_Cobblestone.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Copper_Ingot.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Cobblestone.png" width="32" height="32"> |
+### Teleporter
+> Used to teleport at locations by shift-clicking on it.  
+> You can assign new points by interacting with Teleporting Essences for a maximum of 4 points.  
+> You can select the point by hitting the block.  
+> You'll need a fully charged Charged Diamond Ingot to craft it.  
+> |     |                |  |
+> |---------|----------------------|------------|
+> | <img src="https://minecraft.wiki/images/Invicon_Glass.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Glass.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Glass.png" width="32" height="32"> |
+> | <img src="https://minecraft.wiki/images/Invicon_Glass.png" width="32" height="32"> | <img src="https://raw.githubusercontent.com/ShoukaSeikyo/shoukaseikyo.github.io/master/images/energized_0_diamond_ingot.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Glass.png" width="32" height="32"> |
+> | <img src="https://minecraft.wiki/images/Invicon_Obsidian.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Obsidian.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Obsidian.png" width="32" height="32"> |
+### Diamond Ingot
+> A new ingot has been added, you can craft it in a smithing table:  
+>  |     |                |  |
+>  |---------|----------------------|------------|
+>  | <img src="https://minecraft.wiki/images/Invicon_Brick.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Lava_Bucket.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Diamond.png" width="32" height="32"> |
+### Charged Diamond Ingot
+> A variant of the Diamond Ingot has been added. You can charge inside an Ingot Charger.  
+> |     |                |  |
+> |---------|----------------------|------------|
+> | <img src="https://minecraft.wiki/images/Invicon_Redstone.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Redstone.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Redstone.png" width="32" height="32"> |
+> | <img src="https://minecraft.wiki/images/Invicon_Redstone.png" width="32" height="32"> | <img src="https://raw.githubusercontent.com/ShoukaSeikyo/shoukaseikyo.github.io/master/images/diamond_ingot.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Redstone.png" width="32" height="32"> |
+> | <img src="https://minecraft.wiki/images/Invicon_Redstone.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Redstone.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Redstone.png" width="32" height="32"> |
+### Teleporting Essence
+> This item can be used once to assign a Teleporting Point.  
+> After that it can be consumed to teleport back to that point or used in a Teleporter.   
+> |                                                                                           |                                                                                           |  |
+> |-------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|------------|
+> | <img src="https://minecraft.wiki/images/Invicon_Chorus_Fruit.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Chorus_Fruit.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Chorus_Fruit.png" width="32" height="32"> |
+> | <img src="https://minecraft.wiki/images/Invicon_Chorus_Fruit.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Eye_of_Ender.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Chorus_Fruit.png" width="32" height="32"> |
+> | <img src="https://minecraft.wiki/images/Invicon_Chorus_Fruit.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Chorus_Fruit.png" width="32" height="32"> | <img src="https://minecraft.wiki/images/Invicon_Chorus_Fruit.png" width="32" height="32"> |
+
 ## 0.3
 ### Bugs fixes
 > Infinity Buckets won't be transformed into Lava Bucket without enchantments when emptying a Lava Cauldron.

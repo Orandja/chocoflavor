@@ -6,8 +6,8 @@ import net.orandja.strawberry.intf.StrawberryItemHandler;
 
 public class StrawberryItem extends Item implements StrawberryItemHandler {
 
-    private final int customDataModel;
-    private final Item replacementItem;
+    protected final int customDataModel;
+    protected final Item replacementItem;
 
     public StrawberryItem(Item replacementItem, int customDataModel, Settings settings) {
         super(settings);

@@ -40,8 +40,7 @@ public abstract class StrawberryCustomBlocks_MarkerEntityMixin extends Entity im
             return;
         }
 
-        if(tick > -1)
-        if (tick != -2 && tick == lastTick) {
+        if(tick > -1 && tick == lastTick) {
             tick = -1;
             lastTick = -1;
             breakingProgress = -1f;

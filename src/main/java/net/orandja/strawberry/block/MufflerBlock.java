@@ -18,8 +18,8 @@ import java.util.Map;
 
 public class MufflerBlock extends StrawberryBlock {
 
-    public MufflerBlock(int noteblockID, String model) {
-        super(noteblockID, model, it -> it.mapColor(MapColor.STONE_GRAY).instrument(Instrument.BASEDRUM).requiresTool().strength(3.5f));
+    public MufflerBlock(int noteblockID) {
+        super(noteblockID, it -> it.mapColor(MapColor.STONE_GRAY).instrument(Instrument.BASEDRUM).requiresTool().strength(3.5f));
     }
 
     @Override

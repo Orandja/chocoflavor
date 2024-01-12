@@ -1,8 +1,8 @@
 package net.orandja.strawberry.block;
 
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffectUtil;
@@ -20,12 +20,12 @@ import net.orandja.strawberry.intf.StrawberryPlayer;
 
 import java.util.function.Consumer;
 
-public class StrawberryBlock extends Block implements StrawberryBlockState {
+public abstract class StrawberryBlockWithEntity extends BlockWithEntity implements StrawberryBlockState {
 
     private final int noteblockID;
 
-    public StrawberryBlock(int noteblockID, Consumer<Settings> configurator) {
-        super(GlobalUtils.apply(AbstractBlock.Settings.create(), configurator::accept));
+    public StrawberryBlockWithEntity(int noteblockID, Consumer<Settings> configurator) {
+        super(GlobalUtils.apply(Settings.create(), configurator::accept));
         this.noteblockID = noteblockID;
     }
 

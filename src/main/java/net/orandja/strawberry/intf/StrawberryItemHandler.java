@@ -25,10 +25,9 @@ public interface StrawberryItemHandler extends StrawberryObject {
 
     static ItemStack _transform(ItemStack sourceStack, Item replacementItem, int customModelData) {
         return GlobalUtils.create(() -> new ItemStack(replacementItem, sourceStack.getCount()), stack -> {
-            if(sourceStack.hasNbt())
-                stack.setNbt(sourceStack.getOrCreateNbt().copy());
+            GlobalUtils.apply(sourceStack.getNbt(), it -> stack.setNbt(it.copy()));
             stack.getOrCreateNbt().putInt("CustomModelData", customModelData);
-            if (!sourceStack.hasNbt() || !sourceStack.getNbt().contains("display")) {
+            if (!sourceStack.hasNbt() || !sourceStack.getNbt().contains("display") || !sourceStack.getNbt().getCompound("display").contains("Name")) {
                 NBTUtils.getTagOrCompute(stack.getOrCreateNbt(), "display", display -> display.putString("Name", TextUtils.getNonItalicTranslatable("item.minecraft." + Registries.ITEM.getId(sourceStack.getItem()).getPath())));
             }
         });

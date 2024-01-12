@@ -1,6 +1,7 @@
 package net.orandja.strawberry.mixin;
 
 import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -25,7 +26,8 @@ public abstract class StrawberryCustomBlocks_AbstractBlockMixin {
 
     @Inject(method = "calcBlockBreakingDelta", at = @At("HEAD"), cancellable = true)
     public void addMiningFatigue(BlockState state, PlayerEntity player, BlockView world, BlockPos pos, CallbackInfoReturnable<Float> info) {
-        if(world.getBlockState(pos.up()).getBlock() instanceof StrawberryBlock) {
+        Block block = world.getBlockState(pos.up()).getBlock();
+        if(block instanceof StrawberryBlock && state.isToolRequired()) {
             float f = state.getHardness(world, pos);
             if (f == -1.0f) {
                 info.setReturnValue(0.0f);

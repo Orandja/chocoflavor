@@ -8,7 +8,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
-import net.orandja.strawberry.block.TripWireBlockData;
+import net.orandja.strawberry.blockdata.TripWireBlockData;
 import net.orandja.strawberry.intf.StrawberryBlockState;
 
 public class SimpleCrop extends CropBlock implements StrawberryBlockState {
@@ -64,9 +64,5 @@ public class SimpleCrop extends CropBlock implements StrawberryBlockState {
 
     public String getModel() {
         return this.model != null ? this.model : Registries.BLOCK.getId(this).getPath();
-    }
-
-    @Override
-    public void register() {
     }
 }

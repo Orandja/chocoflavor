@@ -25,10 +25,6 @@ public interface StrawberryToolItem extends StrawberryItemHandler {
         });
     }
 
-    @Override
-    default void register() {
-    }
-
     static int getBaseAttackDamage(Item item) {
         if(item instanceof MiningToolItem miningToolItem) {
             return (int) (miningToolItem.getAttackDamage() - miningToolItem.getMaterial().getAttackDamage());

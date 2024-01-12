@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.orandja.chocoflavor.utils.GlobalUtils;
-import net.orandja.strawberry.block.NoteBlockData;
+import net.orandja.strawberry.blockdata.NoteBlockData;
 import net.orandja.strawberry.intf.StrawberryItemHandler;
 
 public class StrawberryBlockItem extends BlockItem implements StrawberryItemHandler {

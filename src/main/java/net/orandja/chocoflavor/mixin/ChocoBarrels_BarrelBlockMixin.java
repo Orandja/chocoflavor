@@ -1,12 +1,17 @@
 package net.orandja.chocoflavor.mixin;
 
 import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.orandja.chocoflavor.ChocoBarrels;
 import net.orandja.chocoflavor.ChocoEnchantments;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,13 +20,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(value = {
-        BrewingStandBlock.class,
-        AbstractFurnaceBlock.class,
-        HopperBlock.class
+        BarrelBlock.class
 })
-public abstract class ChocoEnchantments_BlockMixin extends BlockWithEntity implements ChocoEnchantments.BlockHandler {
+public abstract class ChocoBarrels_BarrelBlockMixin extends BlockWithEntity implements ChocoBarrels.Handler {
 
-    protected ChocoEnchantments_BlockMixin(Settings settings) {
+    protected ChocoBarrels_BarrelBlockMixin(Settings settings) {
         super(settings);
     }
 
@@ -34,5 +37,11 @@ public abstract class ChocoEnchantments_BlockMixin extends BlockWithEntity imple
     @Override
     public List<ItemStack> getDroppedStacks(BlockState state, LootContextParameterSet.Builder builder) {
         return enchantLoots(super.getDroppedStacks(state, builder), state, builder);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return this.getCustomTicker();
     }
 }

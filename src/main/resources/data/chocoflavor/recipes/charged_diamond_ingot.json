@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#D#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:redstone"
+    },
+    "D": {
+      "item": "minecraft:diamond_ingot"
+    }
+  },
+  "result": {
+    "item": "minecraft:charged_diamond_ingot",
+    "count": 1
+  }
+}

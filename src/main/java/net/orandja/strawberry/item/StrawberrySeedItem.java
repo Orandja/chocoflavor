@@ -10,7 +10,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.orandja.chocoflavor.utils.GlobalUtils;
-import net.orandja.strawberry.block.TripWireBlockData;
+import net.orandja.strawberry.blockdata.TripWireBlockData;
 import net.orandja.strawberry.intf.StrawberryItemHandler;
 
 public class StrawberrySeedItem extends AliasedBlockItem implements StrawberryItemHandler {

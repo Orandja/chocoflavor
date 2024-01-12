@@ -6,6 +6,7 @@
     "ChocoAnimals_AnimalEntityMixin",
     "ChocoAnimals_InitMixin",
     "ChocoBarrels_BarrelBlockEntityMixin",
+    "ChocoBarrels_BarrelBlockMixin",
     "ChocoBarrels_BarrelHopperBlockEntityMixin",
     "ChocoBarrels_InitMixin",
     "ChocoBrewingStands_BrewingStandBlockEntityMixin",

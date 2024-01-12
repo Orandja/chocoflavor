@@ -15,10 +15,10 @@ import java.util.function.Consumer;
 
 public class ChocoRecipes {
 
-    private static Map<Identifier, Suppliers.Quin<ShapedRecipe, String, Integer, Integer, DefaultedList<Ingredient>, ItemStack>> customShapedRecipes = Maps.newHashMap();
+    private static Map<Identifier, Suppliers.Six<ShapedRecipe, String, CraftingRecipeCategory, Integer, Integer, DefaultedList<Ingredient>, ItemStack>> customShapedRecipes = Maps.newHashMap();
     private static Map<Identifier, Suppliers.Quad<ShapelessRecipe, String, CraftingRecipeCategory, ItemStack, DefaultedList<Ingredient>>> customShapelessRecipes = Maps.newHashMap();
 
-    public static void addShapedRecipe(Identifier identifier, Suppliers.Quin<ShapedRecipe, String, Integer, Integer, DefaultedList<Ingredient>, ItemStack> recipe) {
+    public static void addShapedRecipe(Identifier identifier, Suppliers.Six<ShapedRecipe, String, CraftingRecipeCategory, Integer, Integer, DefaultedList<Ingredient>, ItemStack> recipe) {
         customShapedRecipes.put(identifier, recipe);
     }
     public static void addShapelessRecipe(Identifier identifier, Suppliers.Quad<ShapelessRecipe, String, CraftingRecipeCategory, ItemStack, DefaultedList<Ingredient>> recipe) {
@@ -33,7 +33,7 @@ public class ChocoRecipes {
         if(customShapedRecipes.containsKey(identifier) && recipeEntry.value() instanceof ShapedRecipe recipe) {
             consumer.accept(new RecipeEntry<>(identifier,
                     customShapedRecipes.get(identifier)
-                            .get(recipe.getGroup(), recipe.getWidth(), recipe.getHeight(), recipe.getIngredients(), recipe.getResult(null))));
+                            .get(recipe.getGroup(), recipe.getCategory(), recipe.getWidth(), recipe.getHeight(), recipe.getIngredients(), recipe.getResult(null))));
             return;
         }
 

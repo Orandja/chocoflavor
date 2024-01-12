@@ -1,4 +1,4 @@
-package net.orandja.strawberry.block;
+package net.orandja.strawberry.blockdata;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

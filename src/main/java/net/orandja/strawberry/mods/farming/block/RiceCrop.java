@@ -7,7 +7,7 @@
 //import net.minecraft.util.math.BlockPos;
 //import net.minecraft.util.shape.VoxelShape;
 //import net.minecraft.world.BlockView;
-//import net.orandja.strawberry.block.NoteBlockData;
+//import net.orandja.strawberry.blockdata.NoteBlockData;
 //import net.orandja.strawberry.mods.core.intf.BlockStateTransformer;
 //import net.orandja.strawberry.mods.farming.Farming;
 //
