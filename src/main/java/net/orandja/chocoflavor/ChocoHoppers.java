@@ -53,9 +53,9 @@ public class ChocoHoppers {
             return new EnchantmentDictionary(VALID_ENCHANTMENTS);
         }
 
-        double getHopperX();
-        double getHopperY();
-        double getHopperZ();
+        double getChocoHopperX();
+        double getChocoHopperY();
+        double getChocoHopperZ();
 
         DefaultedList<ItemStack> getInventory();
 
@@ -86,7 +86,7 @@ public class ChocoHoppers {
                 }
                 return StackUtils.hasMinimum(stack, 2);
             }
-            return true;
+            return !stack.isEmpty();
         }
 
         IntStream availableSlots(Inventory inventory, Direction side);
@@ -119,7 +119,7 @@ public class ChocoHoppers {
 
         default Function<Box, Stream<ItemEntity>> offsetMapper(World world, Function<Box, Stream<ItemEntity>> mapper) {
             if(getDictionary().hasAnyEnchantment(OFFSET)) {
-                return (box -> world.getEntitiesByClass(ItemEntity.class, box.offset(getHopperX() - 0.5, getHopperY() + getDictionary().getValue(OFFSET.getValue()) - 0.5, getHopperZ() - 0.5), EntityPredicates.VALID_ENTITY).stream());
+                return (box -> world.getEntitiesByClass(ItemEntity.class, box.offset(getChocoHopperX() - 0.5, getChocoHopperY() + getDictionary().getValue(OFFSET.getValue()) - 0.5, getChocoHopperZ() - 0.5), EntityPredicates.VALID_ENTITY).stream());
             }
             return mapper;
         }
@@ -127,7 +127,7 @@ public class ChocoHoppers {
         Inventory getHopperInventoryAt(World world, double x, double y, double z);
         default Inventory getOffsetInventoryAt(Inventory inventory, World world) {
             if(getDictionary().hasAnyEnchantment(OFFSET)) {
-                return getHopperInventoryAt(world, getHopperX(), getHopperY() + getDictionary().getValue(OFFSET.getValue()) + 1.0, getHopperZ());
+                return getHopperInventoryAt(world, getChocoHopperX(), getChocoHopperY() + getDictionary().getValue(OFFSET.getValue()) + 1.0, getChocoHopperZ());
             }
             return inventory;
         }

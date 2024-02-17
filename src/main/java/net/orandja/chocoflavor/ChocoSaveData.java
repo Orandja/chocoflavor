@@ -6,6 +6,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.World;
+import net.orandja.chocoflavor.utils.GlobalUtils;
 import net.orandja.chocoflavor.utils.NBTUtils;
 import net.orandja.chocoflavor.utils.Settings;
 

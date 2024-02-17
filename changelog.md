@@ -1,3 +1,22 @@
+## 0.4.1
+### Compatibility
+> Added a compatibility mixin for Lithium where chunks wouldn't load since BlockStates wouldn't be replaced before being sent to the client.
+### Bug fixes
+> Anvil now have the vanilla maximum level of enchantment combining. They did not and it resulted in an error.  
+> Fixed a crash with Enchanted Furnaces.  
+> Fixed a crash with Enchanted Hoppers.  
+> Water Buckets can now be enchanted again.  
+> Empty Buckets can now be enchanted with Efficiency again.  
+> Fixed a problem with Hoppers that wouldn't empty themselves completely.  
+> Fixed a loading problem with Cloud Boxes where they wouldn't load their content on the overworld's loading.  
+> Fixed a problem where custom blocks would continue being destroyed after the player used a Teleporter block.  
+### DoubleTools
+> Vein Miner is now available for Pickaxes.
+### Tools
+> Crossbows now accept two new enchantments: Infinity and Power.
+### Teleporter
+> You may now teleport by sneaking and hitting the block. This is a counter measure to the base game mechanic where the interaction would be cancelled if you hold an item in the secondary hand while sneaking.
+
 ## 0.4
 ### Global Refactoring
 > A large portion of the code was rewritten to put the multiple parts that affected the same game mechanics together.

@@ -15,6 +15,14 @@ import java.util.function.Supplier;
 
 public class BlockNavigator {
 
+    public enum State {
+        PASS,
+        CANCEL,
+        ACCEPT,
+        SAVE,
+        ACCEPT_AND_SAVE;
+    }
+
     private final World world;
     private BlockPos position;
     private List<BlockPos> navigated = new ArrayList<>();

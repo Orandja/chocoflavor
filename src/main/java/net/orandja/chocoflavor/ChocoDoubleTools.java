@@ -18,6 +18,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.orandja.chocoflavor.tooltask.AdjascentToolTask;
 import net.orandja.chocoflavor.tooltask.DoubleToolTask;
+import net.orandja.chocoflavor.tooltask.VeinToolTask;
 import net.orandja.chocoflavor.utils.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -32,7 +33,7 @@ public class ChocoDoubleTools {
     public static final DefaultedMap<Class<? extends Item>, DoubleToolTask> availableTasks = new DefaultedMap<>(GlobalUtils::isSubClass);
     public static void init() {
         availableTasks.add(ShovelItem.class, new DoubleToolTask[] { AdjascentToolTask.All, AdjascentToolTask.SimilarOnly, AdjascentToolTask.Down, AdjascentToolTask.DownSimilarOnly });
-        availableTasks.add(PickaxeItem.class, new DoubleToolTask[] { AdjascentToolTask.All, AdjascentToolTask.SimilarOnly, AdjascentToolTask.Down, AdjascentToolTask.DownSimilarOnly });
+        availableTasks.add(PickaxeItem.class, new DoubleToolTask[] { AdjascentToolTask.All, AdjascentToolTask.SimilarOnly, AdjascentToolTask.Down, AdjascentToolTask.DownSimilarOnly, VeinToolTask.oreVeinMine });
 
         ChocoInventories.listenForMiddleClick(stack -> availableTasks.contains(stack.getItem().getClass()), (stack, player) -> {
             if(player instanceof UserHandler toolUser) {
@@ -135,55 +136,15 @@ public class ChocoDoubleTools {
     }
 
     public interface AxeHandler {
-        int[] zone = new int[]{ -1, 1, 0, 1, -1, 1 };
         default void useDoubleAxes(World world, BlockState state, BlockPos pos, LivingEntity entity, Runnable defaultMethod) {
             if(!world.isClient && BlockUtils.isWood(state) && entity instanceof PlayerEntity player && PlayerUtils.areBothToolsSuitable(player, state, AxeItem.class)) {
-                Block baseWood = state.getBlock();
-                DropsList dropsList = new DropsList();
-
-                AtomicBoolean cancelled = new AtomicBoolean(false);
-
-                new BlockNavigator(world, pos)
-                    .scanAtWithItself(pos, zone, (nav, oPos, oState, itself) -> {
-                        if(cancelled.get()) {
-                            return;
-                        }
-
-                        if(BlockUtils.isLeavesIgnorePersistent(oState)) {
-                            if(oState.get(LeavesBlock.PERSISTENT)) {
-                                cancelled.set(true);
-                            } else {
-                                itself.accept(oPos);
-                            }
-                            return;
-                        }
-
-                        if(BlockUtils.areSameWoods(oState, baseWood)) {
-                            nav.save(oPos);
-                            itself.accept(oPos);
-                        }
-                    }).getSaved(oPos -> {
-                        if(cancelled.get() || StackUtils.anyGonnaBreak(player.getMainHandStack(), player.getOffHandStack())) {
-                            return;
-                        }
-                        damageTools(player, state);
-                        dropsList.addDrop(Block.getDroppedStacks(state, (ServerWorld) world, pos, null, player, player.getMainHandStack()));
-                        world.setBlockState(oPos, Blocks.AIR.getDefaultState(), 2);
-                    });
-
-                    if(cancelled.get()) {
-                        defaultMethod.run();
-                        return;
+                if(VeinToolTask.woodVeinMine.execute(world, pos, player, state, player.getMainHandStack(), player.getOffHandStack(), it -> {
+                    if(PlayerUtils.areBothToolsSuitable(player, world.getBlockState(it), ShovelItem.class)) {
+                        destroyBlock(player, state, it);
                     }
-
-                    damageTools(player, state);
-                    dropsList.addDrop(Block.getDroppedStacks(state, (ServerWorld) world, pos, null, player, player.getMainHandStack()));
-                    world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
-
-                    dropsList.getDrops(stack -> {
-                        Block.dropStack(world, pos, stack.copy());
-                        state.onStacksDropped((ServerWorld) world, pos, player.getMainHandStack(), true);
-                    });
+                })) {
+                    defaultMethod.run();
+                }
             } else {
                 defaultMethod.run();
             }

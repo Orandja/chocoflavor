@@ -77,6 +77,12 @@ public abstract class ChocoHoppers_HopperBlockEntityMixin extends LockableContai
         return null;
     }
 
+    @Shadow public abstract double getHopperX();
+
+    @Shadow public abstract double getHopperY();
+
+    @Shadow public abstract double getHopperZ();
+
     @Inject(method = "insertAndExtract",
             locals = LocalCapture.CAPTURE_FAILSOFT,
             at = @At(value = "INVOKE_ASSIGN",shift = At.Shift.AFTER, target = "Lnet/minecraft/block/entity/HopperBlockEntity;insert(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;Lnet/minecraft/inventory/Inventory;)Z"))
@@ -166,5 +172,20 @@ public abstract class ChocoHoppers_HopperBlockEntityMixin extends LockableContai
     @Inject(method = "writeNbt", at = @At("HEAD"))
     public void writeNbt(NbtCompound tag, CallbackInfo info) {
         getDictionary().saveToNbt(tag);
+    }
+
+    @Override
+    public double getChocoHopperX() {
+        return getHopperX();
+    }
+
+    @Override
+    public double getChocoHopperY() {
+        return getHopperY();
+    }
+
+    @Override
+    public double getChocoHopperZ() {
+        return getHopperZ();
     }
 }

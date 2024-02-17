@@ -13,6 +13,7 @@
     "StrawberryCustomBlocks_InitMixin",
     "StrawberryCustomBlocks_LightningEntityMixin",
     "StrawberryCustomBlocks_LightningRodBlockMixin",
+    "StrawberryCustomBlocks_LithiumHashPaletteMixin",
     "StrawberryCustomBlocks_MarkerEntityMixin",
     "StrawberryCustomBlocks_PacketByteBufMixin",
     "StrawberryCustomBlocks_PaletteMixin",

@@ -17,7 +17,6 @@ import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -54,7 +53,7 @@ public class ChocoBuckets {
                     return false;
                 });
 
-        ChocoEnchantments.createRegistry(Items.BUCKET)
+        ChocoEnchantments.createRegistry(Items.WATER_BUCKET)
                 .allowInAnvil(Enchantments.INFINITY);
 
         CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(Items.WATER_BUCKET, (state, world, pos, player, hand, stack) ->

@@ -33,7 +33,7 @@ public class ChocoShulkerBoxes {
 
     public static void init() {
         ChocoSaveData.onLoad("cloudboxes", it -> {
-            inventories.clear();
+//            inventories.clear();
             it.getList("boxes", NbtElement.COMPOUND_TYPE).forEach(ChocoShulkerBoxes::addFromStorage);
         });
 
@@ -71,7 +71,8 @@ public class ChocoShulkerBoxes {
         return inventories.computeIfAbsent(name, key -> new CloudInventory(name));
     }
     private static void addCloudInventory(CloudInventory inventory) {
-        inventories.put(inventory.getName(), inventory);
+        if(!inventories.containsKey(inventory.getName()))
+            inventories.put(inventory.getName(), inventory);
     }
     private static void addFromStorage(NbtElement element) {
         GlobalUtils.runAs(element, NbtCompound.class, CloudInventory::loadFromStorage, ChocoShulkerBoxes::addCloudInventory);

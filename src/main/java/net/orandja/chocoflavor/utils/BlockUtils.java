@@ -20,7 +20,8 @@ public abstract class BlockUtils {
     }
 
     public static boolean isOre(BlockState state) {
-        return GlobalUtils.<Class<?>>any(state.getBlock().getClass()::isAssignableFrom, ExperienceDroppingBlock.class, RedstoneOreBlock.class);
+        return ExperienceDroppingBlock.class.isAssignableFrom(state.getBlock().getClass()) || RedstoneOreBlock.class.isAssignableFrom(state.getBlock().getClass());
+//        return GlobalUtils.<Class<?>>any(state.getBlock().getClass()::isAssignableFrom, ExperienceDroppingBlock.class, RedstoneOreBlock.class);
     }
 
     public static boolean isLeaves(BlockState state) {

@@ -10,7 +10,6 @@ import net.minecraft.world.World;
 import net.orandja.chocoflavor.enchantment.EnchantmentArraySetting;
 import net.orandja.chocoflavor.enchantment.EnchantmentDictionary;
 import net.orandja.chocoflavor.enchantment.EnchantmentDictionaryUtils;
-import net.orandja.chocoflavor.utils.GlobalUtils;
 import net.orandja.chocoflavor.utils.Settings;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -55,7 +54,7 @@ public class ChocoFurnaces {
         int getCookTime();
         void setCookTime(int value);
 
-        World getWorld();
+        World getChocoWorld();
 
         int getBurnTime();
         void setBurnTime(int value);
@@ -81,7 +80,7 @@ public class ChocoFurnaces {
 
         default void increaseOutput() {
             if(!(getInventory().get(2).getItem() instanceof BlockItem)) {
-                getInventory().get(2).increment(Math.max(0, getDictionary().computeValue(lvl -> getWorld().getRandom().nextInt(lvl + 2), FORTUNE.getValue()) - 1));
+                getInventory().get(2).increment(Math.max(0, getDictionary().computeValue(lvl -> getChocoWorld().getRandom().nextInt(lvl + 2), FORTUNE.getValue()) - 1));
             }
         }
     }

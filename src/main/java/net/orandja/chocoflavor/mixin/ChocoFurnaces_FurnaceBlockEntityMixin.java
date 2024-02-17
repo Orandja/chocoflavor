@@ -76,4 +76,9 @@ public abstract class ChocoFurnaces_FurnaceBlockEntityMixin extends LockableCont
     private static void increaseOutputAmount(World world, BlockPos pos, BlockState state, AbstractFurnaceBlockEntity entity, CallbackInfo info) {
         GlobalUtils.applyAs(entity, ChocoFurnaces.Handler.class, ChocoFurnaces.Handler::increaseOutput);
     }
+
+    @Override
+    public World getChocoWorld() {
+        return getWorld();
+    }
 }

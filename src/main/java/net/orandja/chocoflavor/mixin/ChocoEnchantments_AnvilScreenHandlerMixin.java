@@ -9,6 +9,7 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.screen.*;
 import net.orandja.chocoflavor.ChocoEnchantments;
+import net.orandja.chocoflavor.enchantment.EnchantmentLevelRegistry;
 import net.orandja.chocoflavor.utils.GlobalUtils;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
@@ -35,7 +36,7 @@ public abstract class ChocoEnchantments_AnvilScreenHandlerMixin extends ForgingS
 
     @Redirect(method = "updateResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/Enchantment;getMaxLevel()I"))
     public int maxLevel(Enchantment enchantment) {
-        return getLevelRegistry(enchantment).getMaxAnvilLevel();
+        return GlobalUtils.runOrDefault(getLevelRegistry(enchantment), enchantment.getMaxLevel(), EnchantmentLevelRegistry::getMaxAnvilLevel);
     }
 
     @Redirect(method = "updateResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/Enchantment;isAcceptableItem(Lnet/minecraft/item/ItemStack;)Z"))

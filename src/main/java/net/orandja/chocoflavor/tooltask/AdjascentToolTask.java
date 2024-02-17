@@ -10,7 +10,6 @@ import net.minecraft.world.World;
 import net.orandja.chocoflavor.utils.GlobalUtils;
 import net.orandja.chocoflavor.utils.StackUtils;
 
-import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 
 public class AdjascentToolTask extends DoubleToolTask {
@@ -86,7 +85,7 @@ public class AdjascentToolTask extends DoubleToolTask {
     }
 
     @Override
-    public void execute(World world, BlockPos pos, PlayerEntity player, BlockState state, ItemStack mainHand, ItemStack offHand, Consumer<BlockPos> consumer) {
+    public boolean execute(World world, BlockPos pos, PlayerEntity player, BlockState state, ItemStack mainHand, ItemStack offHand, Consumer<BlockPos> consumer) {
         int[] zone = zones[getDirection(player)];
 
         Block block = state.getBlock();
@@ -100,6 +99,8 @@ public class AdjascentToolTask extends DoubleToolTask {
                 }
             }
         }
+
+        return false;
     }
 
     public int getDirection(PlayerEntity player) {

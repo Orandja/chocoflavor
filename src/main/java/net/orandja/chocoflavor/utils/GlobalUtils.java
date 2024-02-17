@@ -190,14 +190,14 @@ public abstract class GlobalUtils {
         return defaultValue;
     }
 
-    public static <T, R> R runAsWithDefault(Object object, Class<T> clazz, R defaultValue, CSupplier<T, R> supplier, Consumer<R> consumer) {
+    public static <T, R> R runAsWithDefault(Object object, Class<T> clazz, R defaultValue, Function<T, R> supplier, Consumer<R> consumer) {
         if(object != null && isSubClass(object.getClass(), clazz)) {
-            return GlobalUtils.apply(supplier.getValue(clazz.cast(object)), consumer::accept);
+            return GlobalUtils.apply(supplier.apply(clazz.cast(object)), consumer);
         }
         return defaultValue;
     }
 
-    public static <T, R> R runAs(Object object, Class<T> clazz, CSupplier<T, R> supplier, Consumer<R> consumer) {
+    public static <T, R> R runAs(Object object, Class<T> clazz, Function<T, R> supplier, Consumer<R> consumer) {
         return runAsWithDefault(object, clazz, null, supplier, consumer);
     }
 

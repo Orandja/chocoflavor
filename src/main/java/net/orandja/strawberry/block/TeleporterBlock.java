@@ -25,7 +25,10 @@ public class TeleporterBlock extends StrawberryBlockWithEntity {
     @Override
     public void onBlockBreakStart(BlockState state, World world, BlockPos pos, PlayerEntity player) {
         if (!world.isClient) {
-            GlobalUtils.applyAs(world.getBlockEntity(pos), TeleporterBlockEntity.class, it -> it.changeIndex(player));
+            GlobalUtils.applyAs(world.getBlockEntity(pos), TeleporterBlockEntity.class, it -> {
+                if (player.isSneaking()) it.tryTeleport(player);
+                else it.changeIndex(player);
+            });
         }
     }
 

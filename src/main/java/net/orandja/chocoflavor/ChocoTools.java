@@ -22,6 +22,8 @@ public class ChocoTools {
                 .allowInAnvil(Enchantments.KNOCKBACK);
         ChocoEnchantments.createRegistry(Items.SHEARS)
                 .allowInAnvil(Enchantments.FORTUNE);
+        ChocoEnchantments.createRegistry(Items.CROSSBOW)
+                .allowInAnvil(Enchantments.POWER, Enchantments.INFINITY);
     }
 
     public interface HoeHandler {

@@ -45,4 +45,17 @@ public abstract class StrawberryCustomBlocks_ServerPlayerEntityMixin extends Pla
         breakerEntity.setPosition(this.getPos());
         getWorld().spawnEntity(breakerEntity);
     }
+
+    @Override
+    public boolean teleport(double x, double y, double z, boolean particleEffects) {
+        //Monkey patching I guess. We need to reset the markerEntity customMiningPos after teleporting.
+
+        if(getBreakerEntity() instanceof StrawberryMarkerEntity markerEntity) {
+            markerEntity.setTick(-1);
+            markerEntity.setBreakingProgress(-1);
+            markerEntity.setMiningPos(null);
+        }
+
+        return super.teleport(x, y, z, particleEffects);
+    }
 }
